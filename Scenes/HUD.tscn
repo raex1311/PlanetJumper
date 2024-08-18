@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://sdtophek5hyb"]
+
+[ext_resource type="Script" path="res://Scenes/TimeCount.gd" id="1_jygrc"]
+
+[node name="Hud" type="Node2D"]
+
+[node name="PointLabel" type="RichTextLabel" parent="."]
+offset_left = 364.0
+offset_top = -833.0
+offset_right = 601.0
+offset_bottom = -788.0
+
+[node name="TimerLabel" type="RichTextLabel" parent="."]
+offset_left = -419.0
+offset_top = -853.0
+offset_right = -190.0
+offset_bottom = -813.0
+script = ExtResource("1_jygrc")

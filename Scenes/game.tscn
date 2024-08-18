@@ -1,0 +1,185 @@
+[gd_scene load_steps=11 format=3 uid="uid://bdmppjpfodq7j"]
+
+[ext_resource type="PackedScene" uid="uid://btmmhcglgp64n" path="res://Scenes/Planet.tscn" id="1_tx5vb"]
+[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_vpq13"]
+[ext_resource type="Script" path="res://Scripts/Spaceship.gd" id="2_anbfd"]
+[ext_resource type="PackedScene" uid="uid://cek487f24avmw" path="res://Scenes/spaceship.tscn" id="2_wh45f"]
+[ext_resource type="PackedScene" uid="uid://y8jq1mps054j" path="res://Scenes/Earth.tscn" id="3_7ex4b"]
+[ext_resource type="PackedScene" uid="uid://dp6smdq8x17kg" path="res://Scenes/DeathWall.tscn" id="4_c0wpf"]
+[ext_resource type="Script" path="res://Scenes/TimeCount.gd" id="8_ngh32"]
+[ext_resource type="PackedScene" uid="uid://dftml8jyodeb" path="res://Scenes/Background.tscn" id="8_nk0yu"]
+[ext_resource type="PackedScene" uid="uid://cp7ghsqhtfsnu" path="res://Scenes/shield.tscn" id="8_qb8qs"]
+[ext_resource type="PackedScene" uid="uid://dnprg3wvkod85" path="res://Scenes/Meteor.tscn" id="9_lceoo"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_vpq13")
+falling_object_scene = ExtResource("1_tx5vb")
+meteor = ExtResource("9_lceoo")
+
+[node name="Background" parent="." instance=ExtResource("8_nk0yu")]
+position = Vector2(1, -1545)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1, -4)
+
+[node name="Planet" parent="." instance=ExtResource("1_tx5vb")]
+position = Vector2(1, -252)
+scale = Vector2(0.06, 0.06)
+
+[node name="DeathWall" parent="." instance=ExtResource("4_c0wpf")]
+position = Vector2(-538.99, -963.08)
+
+[node name="Earth" parent="." instance=ExtResource("3_7ex4b")]
+position = Vector2(5.96046e-08, -0.999998)
+
+[node name="TheSpaceship" parent="Earth" groups=["spaceships"] instance=ExtResource("2_wh45f")]
+position = Vector2(-3.8147e-06, -1233.33)
+scale = Vector2(33.3333, 33.3333)
+script = ExtResource("2_anbfd")
+
+[node name="ShieldTimer" type="Timer" parent="Earth/TheSpaceship"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Shield" parent="Earth/TheSpaceship" instance=ExtResource("8_qb8qs")]
+visible = false
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="GameHUD" type="Control" parent="."]
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -539.0
+offset_top = -965.0
+offset_right = 541.0
+offset_bottom = 955.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="Timer" type="ColorRect" parent="GameHUD"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 129.0
+offset_right = 317.0
+offset_bottom = 207.0
+color = Color(1, 1, 1, 0.407843)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameHUD/Timer"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -13.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Hello There General Kenobi"
+script = ExtResource("8_ngh32")
+DifficultyLimit1 = 6
+DifficultyLimit2 = 12
+DifficultyLimit3 = 18
+
+[node name="Points" type="ColorRect" parent="GameHUD"]
+layout_mode = 0
+offset_left = 759.0
+offset_top = 124.0
+offset_right = 988.0
+offset_bottom = 202.0
+color = Color(1, 1, 1, 0.372549)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameHUD/Points"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Hello There General Kenobi"
+
+[node name="ActivateShieldButton" type="Button" parent="GameHUD"]
+layout_mode = 0
+offset_left = 873.0
+offset_top = 1583.0
+offset_right = 881.0
+offset_bottom = 1591.0
+focus_mode = 0
+text = "Activate Shield"
+
+[node name="GameOverScreen" type="Control" parent="."]
+visible = false
+z_index = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -539.0
+offset_top = -965.0
+offset_right = 541.0
+offset_bottom = 955.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="GameOverScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="GameOverScreen/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -286.0
+offset_top = -343.0
+offset_right = 285.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.384314, 0.384314, 0.772549)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameOverScreen/Panel/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -20.0
+offset_right = 50.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Over"
+
+[node name="Button" type="Button" parent="GameOverScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = 25.0
+offset_right = 48.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Main Menu"
+
+[connection signal="timeout" from="Earth/TheSpaceship/ShieldTimer" to="Earth/TheSpaceship" method="deactivate_Shield"]
+[connection signal="pressed" from="GameHUD/ActivateShieldButton" to="Earth/TheSpaceship" method="activate_Shield"]
+[connection signal="pressed" from="GameOverScreen/Button" to="." method="Goto_MainMenu"]

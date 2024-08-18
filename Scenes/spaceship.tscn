@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cek487f24avmw"]
+
+[ext_resource type="Script" path="res://Scripts/Laser.gd" id="1_7cjmu"]
+[ext_resource type="Texture2D" uid="uid://cupbvjf5oav7t" path="res://Images/spaceship.jpg" id="1_wauvi"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oabbq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k1nsn"]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("1_wauvi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_oabbq")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, -29)
+script = ExtResource("1_7cjmu")
+
+[node name="Line2D" type="Line2D" parent="RayCast2D"]
+default_color = Color(0.713821, 0.873015, 0.44839, 1)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="RayCast2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RayCast2D/StaticBody2D"]
+shape = SubResource("RectangleShape2D_k1nsn")

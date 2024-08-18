@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://dftml8jyodeb"]
+
+[ext_resource type="Texture2D" uid="uid://dadfm4y4jy7ne" path="res://Images/SpaceBackground.png" id="1_73avt"]
+[ext_resource type="Script" path="res://Scripts/BackgroundMover.gd" id="1_trry7"]
+[ext_resource type="Texture2D" uid="uid://cupbvjf5oav7t" path="res://Images/spaceship.jpg" id="3_vccpr"]
+
+[node name="Background" type="Node2D" node_paths=PackedStringArray("BG1", "BG2", "BG3")]
+script = ExtResource("1_trry7")
+BG1 = NodePath("Background1")
+BG2 = NodePath("Background2")
+BG3 = NodePath("Background3")
+
+[node name="Background1" type="Sprite2D" parent="."]
+texture = ExtResource("1_73avt")
+
+[node name="Sprite2D" type="Sprite2D" parent="Background1"]
+position = Vector2(17, -2505)
+rotation = -1.5708
+scale = Vector2(0.173913, 0.203186)
+texture = ExtResource("3_vccpr")
+
+[node name="Background2" type="Sprite2D" parent="."]
+position = Vector2(0, -5000)
+texture = ExtResource("1_73avt")
+
+[node name="Background3" type="Sprite2D" parent="."]
+position = Vector2(0, -10000)
+texture = ExtResource("1_73avt")

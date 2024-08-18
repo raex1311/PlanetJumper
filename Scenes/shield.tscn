@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cp7ghsqhtfsnu"]
+
+[ext_resource type="Texture2D" uid="uid://duigeawc2ehe7" path="res://Images/Shield.png" id="1_xqp76"]
+
+[node name="Shield" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.384314)
+scale = Vector2(0.195, 0.195)
+texture = ExtResource("1_xqp76")
