@@ -57,10 +57,16 @@ func set_spaceship_position(pos : Vector2, rot : float):
 
 func activate_Shield():
 	if(shield_On): return
+	if(GlobalVariables.globalpoints<0):
+		print("No Points Available!!")
+		return
+	GlobalVariables.deduct_point(5)
+	SaveAndLoad.Save_PlayerData()
 	print("Shield Activated!!")
 	shield_On = true
 	shield.visible = true
 	var timer = $ShieldTimer
+	timer.wait_time = GlobalVariables.Shield_Time
 	timer.start()
 	
 	
