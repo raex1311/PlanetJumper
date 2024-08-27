@@ -18,11 +18,17 @@ func Load_PlayerData():
 	GlobalVariables.HighScore = playerData.highscore
 	print("Points Loaded: ", playerData.points)
 	
-func Save_PlayerData():
-	playerData.change_points(GlobalVariables.globalpoints)
+func Save_PlayerData(saveType : GlobalVariables.SaveType):
+	
+	match saveType:
+		GlobalVariables.SaveType.Points:
+			playerData.change_points(GlobalVariables.globalpoints)
+		GlobalVariables.SaveType.HighScore:
+			playerData.change_highscore(GlobalVariables.HighScore)
+		GlobalVariables.SaveType.ShieldTime:
+			playerData.change_shieldtime()
 	ResourceSaver.save(playerData,save_file_path + save_file_name)
 	
-func Save_HighScore():
-	playerData.change_highscore(GlobalVariables.HighScore)
-	ResourceSaver.save(playerData,save_file_path + save_file_name)
+	
+
 #=====================================================

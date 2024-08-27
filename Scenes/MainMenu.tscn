@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://btpmrtqurv82x"]
+[gd_scene load_steps=3 format=3 uid="uid://btpmrtqurv82x"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_pa3dl"]
+[ext_resource type="Script" path="res://Scripts/Shop.gd" id="2_exrl1"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -58,4 +59,23 @@ offset_bottom = 139.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Buy Shield" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = 273.0
+offset_right = 45.0
+offset_bottom = 304.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Buy Shield"
+
+[node name="Shop" type="Node2D" parent="."]
+script = ExtResource("2_exrl1")
+
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="start_button_pressed"]
+[connection signal="button_down" from="Buy Shield" to="Shop" method="Buy_Shield"]

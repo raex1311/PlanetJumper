@@ -38,7 +38,6 @@ scale = Vector2(33.3333, 33.3333)
 script = ExtResource("2_anbfd")
 
 [node name="ShieldTimer" type="Timer" parent="Earth/TheSpaceship"]
-wait_time = 2.0
 one_shot = true
 
 [node name="Shield" parent="Earth/TheSpaceship" instance=ExtResource("8_qb8qs")]

@@ -1,11 +1,18 @@
 extends Control
 
 
-# Called when the node enters the scene tree for the first time.
+
+#========= Loading Data from files to GlobalData ========================
 func _ready():
-	var loadData = SaveAndLoad.Load_PlayerData()
+	SaveAndLoad.Load_PlayerData()
 	$PointLabel.text = str("Points: ",GlobalVariables.globalpoints)
 	$HighScore.text = str("High Score: ", GlobalVariables.HighScore)
+	
+	print("This is the end!!")
+	if(SaveAndLoad.playerData.shieldTime!=null):
+		GlobalVariables.Shield_Time = SaveAndLoad.playerData.shieldTime
+	else:
+		print("There is no any shield Time!!")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

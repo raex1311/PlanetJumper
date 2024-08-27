@@ -61,4 +61,3 @@ func spawn_left():
 func spawn_right():
 	position.y = randf_range(0,800)
 	position.x = randf_range(1090,1100)
-

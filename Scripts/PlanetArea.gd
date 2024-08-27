@@ -14,4 +14,3 @@ func _on_Area2D_body_entered(body):
 		body.circle_position = global_position
 		body.circle_radius = $CollisionShape2D.shape.radius
 		body.set_spaceship_position(get_child(1).global_position,get_child(1).global_rotation)
-

@@ -12,3 +12,9 @@ func deduct_point(points_to_deduct:int):
 
 func add_ShieldTime():
 	Shield_Time = Shield_Time + 1
+
+enum SaveType {
+	Points,
+	HighScore,
+	ShieldTime
+}

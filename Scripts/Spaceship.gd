@@ -66,6 +66,7 @@ func activate_Shield():
 	shield_On = true
 	shield.visible = true
 	var timer = $ShieldTimer
+	print("Shield Timer: ", GlobalVariables.Shield_Time)
 	timer.wait_time = GlobalVariables.Shield_Time
 	timer.start()
 	
