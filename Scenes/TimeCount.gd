@@ -41,4 +41,4 @@ func DifficultyChange():
 func AddHighScore():
 	if(int(time_elapsed) > GlobalVariables.HighScore):
 		GlobalVariables.HighScore = int(time_elapsed)
-		SaveAndLoad.Save_PlayerData()
+		SaveAndLoad.Save_PlayerData(GlobalVariables.SaveType.HighScore)

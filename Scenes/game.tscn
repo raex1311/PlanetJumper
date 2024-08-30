@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bdmppjpfodq7j"]
+[gd_scene load_steps=12 format=3 uid="uid://bdmppjpfodq7j"]
 
 [ext_resource type="PackedScene" uid="uid://btmmhcglgp64n" path="res://Scenes/Planet.tscn" id="1_tx5vb"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_vpq13"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dftml8jyodeb" path="res://Scenes/Background.tscn" id="8_nk0yu"]
 [ext_resource type="PackedScene" uid="uid://cp7ghsqhtfsnu" path="res://Scenes/shield.tscn" id="8_qb8qs"]
 [ext_resource type="PackedScene" uid="uid://dnprg3wvkod85" path="res://Scenes/Meteor.tscn" id="9_lceoo"]
+[ext_resource type="PackedScene" uid="uid://dmupes8gps0ij" path="res://Scenes/PauseMenu.tscn" id="11_feymk"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_vpq13")
@@ -111,6 +112,9 @@ offset_right = 881.0
 offset_bottom = 1591.0
 focus_mode = 0
 text = "Activate Shield"
+
+[node name="PauseMenu" parent="." instance=ExtResource("11_feymk")]
+visible = false
 
 [node name="GameOverScreen" type="Control" parent="."]
 visible = false

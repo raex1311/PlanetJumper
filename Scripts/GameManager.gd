@@ -46,7 +46,7 @@ func add_point():
 	planet_points += 1
 	point_label.text = str("Points: ",planet_points)
 	GlobalVariables.add_point()
-	SaveAndLoad.Save_PlayerData()
+	#SaveAndLoad.Save_PlayerData(GlobalVariables.SaveType.Points)
 	
 
 
@@ -76,6 +76,13 @@ func stop_game():
 
 func pause_game():
 	pausingGame.emit()
+	onPause()
+	
+func onPause():
+	if get_tree().paused:
+		get_tree().paused = false  # Unpause the game
+	else:
+		get_tree().paused = true  # Pause the game
 	
 func GameOver():
 	print("Game Over!!")
