@@ -18,3 +18,6 @@ func Buy_Points():
 	var type = SavingTypeList.new()
 	type.type_list["Points"] = true
 	SaveAndLoad.Save_PlayerData(type)
+
+func Buy_Boosters():
+	pass

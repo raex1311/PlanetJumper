@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bdmppjpfodq7j"]
+[gd_scene load_steps=13 format=3 uid="uid://bdmppjpfodq7j"]
 
 [ext_resource type="PackedScene" uid="uid://btmmhcglgp64n" path="res://Scenes/Planet.tscn" id="1_tx5vb"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_vpq13"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cp7ghsqhtfsnu" path="res://Scenes/shield.tscn" id="8_qb8qs"]
 [ext_resource type="PackedScene" uid="uid://dnprg3wvkod85" path="res://Scenes/Meteor.tscn" id="9_lceoo"]
 [ext_resource type="PackedScene" uid="uid://dmupes8gps0ij" path="res://Scenes/PauseMenu.tscn" id="11_feymk"]
+[ext_resource type="Script" path="res://Scripts/ButtonManager.gd" id="12_3kma4"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_vpq13")
@@ -113,6 +114,16 @@ offset_bottom = 1591.0
 focus_mode = 0
 text = "Activate Shield"
 
+[node name="Settings" type="Button" parent="GameHUD"]
+layout_mode = 0
+offset_left = 617.0
+offset_top = 1583.0
+offset_right = 739.0
+offset_bottom = 1614.0
+focus_mode = 0
+text = "Settings
+"
+
 [node name="PauseMenu" parent="." instance=ExtResource("11_feymk")]
 visible = false
 
@@ -183,6 +194,12 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Main Menu"
 
+[node name="ButtonManager" type="Node2D" parent="." node_paths=PackedStringArray("spaceship", "pauseMenu", "ActivateShieldButton", "SettingsButton")]
+script = ExtResource("12_3kma4")
+spaceship = NodePath("../Earth/TheSpaceship")
+pauseMenu = NodePath("../PauseMenu")
+ActivateShieldButton = NodePath("../GameHUD/ActivateShieldButton")
+SettingsButton = NodePath("../GameHUD/Settings")
+
 [connection signal="timeout" from="Earth/TheSpaceship/ShieldTimer" to="Earth/TheSpaceship" method="deactivate_Shield"]
-[connection signal="pressed" from="GameHUD/ActivateShieldButton" to="Earth/TheSpaceship" method="activate_Shield"]
 [connection signal="pressed" from="GameOverScreen/Button" to="." method="Goto_MainMenu"]
