@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bdmppjpfodq7j"]
+[gd_scene load_steps=14 format=3 uid="uid://bdmppjpfodq7j"]
 
 [ext_resource type="PackedScene" uid="uid://btmmhcglgp64n" path="res://Scenes/Planet.tscn" id="1_tx5vb"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_vpq13"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dnprg3wvkod85" path="res://Scenes/Meteor.tscn" id="9_lceoo"]
 [ext_resource type="PackedScene" uid="uid://dmupes8gps0ij" path="res://Scenes/PauseMenu.tscn" id="11_feymk"]
 [ext_resource type="Script" path="res://Scripts/ButtonManager.gd" id="12_3kma4"]
+[ext_resource type="Script" path="res://Scripts/FirebaseSettings.gd" id="13_djwbg"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_vpq13")
@@ -72,7 +73,7 @@ offset_right = 317.0
 offset_bottom = 207.0
 color = Color(1, 1, 1, 0.407843)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="GameHUD/Timer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="GameHUD/Timer" node_paths=PackedStringArray("FirebaseManager")]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -87,6 +88,7 @@ script = ExtResource("8_ngh32")
 DifficultyLimit1 = 6
 DifficultyLimit2 = 12
 DifficultyLimit3 = 18
+FirebaseManager = NodePath("../../../FirebaseManager")
 
 [node name="Points" type="ColorRect" parent="GameHUD"]
 layout_mode = 0
@@ -124,8 +126,25 @@ focus_mode = 0
 text = "Settings
 "
 
+[node name="Booster" type="Button" parent="GameHUD"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -409.0
+offset_top = -340.0
+offset_right = -340.0
+offset_bottom = -309.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+text = "Booster"
+
 [node name="PauseMenu" parent="." instance=ExtResource("11_feymk")]
 visible = false
+z_index = 1
 
 [node name="GameOverScreen" type="Control" parent="."]
 visible = false
@@ -201,5 +220,9 @@ pauseMenu = NodePath("../PauseMenu")
 ActivateShieldButton = NodePath("../GameHUD/ActivateShieldButton")
 SettingsButton = NodePath("../GameHUD/Settings")
 
+[node name="FirebaseManager" type="Node2D" parent="."]
+script = ExtResource("13_djwbg")
+
 [connection signal="timeout" from="Earth/TheSpaceship/ShieldTimer" to="Earth/TheSpaceship" method="deactivate_Shield"]
+[connection signal="pressed" from="GameHUD/Booster" to="." method="Use_Boosters"]
 [connection signal="pressed" from="GameOverScreen/Button" to="." method="Goto_MainMenu"]

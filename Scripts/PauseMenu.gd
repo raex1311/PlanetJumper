@@ -15,7 +15,7 @@ func show_pauseMenu(menuType : String):
 func hide_pauseMenu():
 	print("Resuming!!!!!!!")
 	get_node(".").visible = false
-	hide_pauseMenu()
+	hide_subMenu()
 	gameManager.pause_game()
 
 func show_subMenu(menuType: String):

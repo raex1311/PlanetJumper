@@ -5,4 +5,5 @@ var type_list : Dictionary = {
 	"Points": false,
 	"HighScore" : false,
 	"ShieldTime" : false,
+	"Boosters" : false,
 }

@@ -4,6 +4,7 @@
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
+z_index = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,6 +15,7 @@ script = ExtResource("1_ay8ll")
 
 [node name="Not Enough Coins" type="Panel" parent="."]
 self_modulate = Color(0.0859593, 0.167504, 0.133971, 0.670588)
+z_index = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -70,6 +72,7 @@ grow_vertical = 0
 text = "Resume"
 
 [node name="Settings Menu" type="Panel" parent="."]
+z_index = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -93,9 +96,19 @@ grow_vertical = 2
 color = Color(0, 0.374187, 0.375577, 1)
 
 [node name="Resume Button" type="Button" parent="Settings Menu/ColorRect"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -15.5
+offset_right = 60.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Resume Game"
 
 [connection signal="pressed" from="Not Enough Coins/ColorRect/Resume Button" to="." method="hide_pauseMenu"]
 [connection signal="pressed" from="Settings Menu/ColorRect/Resume Button" to="." method="hide_pauseMenu"]

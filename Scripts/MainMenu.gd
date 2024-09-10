@@ -11,13 +11,19 @@ func _ready():
 func Refresh_Stored_Data():
 	$PointLabel.text = str("Points: ",GlobalVariables.globalpoints)
 	$HighScore.text = str("High Score: ", GlobalVariables.HighScore)
-	
 	print("This is the end!!")
 	if(SaveAndLoad.playerData.shieldTime!=null):
 		print("Shield Time: ", SaveAndLoad.playerData.shieldTime)
 		GlobalVariables.Shield_Time = SaveAndLoad.playerData.shieldTime
 	else:
 		print("There is no any shield Time!!")
+		
+	if(SaveAndLoad.playerData.Boosters!=null):
+		print("The Booster: ", SaveAndLoad.playerData.Boosters)
+		GlobalVariables.Shield_Time = SaveAndLoad.playerData.Boosters
+	else:
+		print("There is no any boosters!!")
+	$"Booster Points".text = str("Booster Points: ",GlobalVariables.Boosters)
 
 	
 func start_button_pressed():

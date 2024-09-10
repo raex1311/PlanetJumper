@@ -9,13 +9,24 @@ var circle_radius: float
 var onEarth = true
 var shield_On = false
 var shield : Node2D
+var original_speed = 200
+var Boost_Speed = 900
+var gameManager
+var gameOver = false
 
 func _ready():
 	current_planet = get_node(".").get_parent()
+	gameManager = get_node("../../")
+	gameManager.connect("BoostSpeed",BoostSpaceship)
 	shield = $Shield
 	deactivate_Shield()
+	gameManager.connect("GameIsOver", set_gameOver)
+
+func set_gameOver():
+	gameOver = true
 
 func _physics_process(delta):
+	if(gameOver): return
 	if on_planet and current_planet:
 		# Rotate with the planet
 		
@@ -55,6 +66,18 @@ func set_spaceship_position(pos : Vector2, rot : float):
 	global_position = pos
 	global_rotation = rot
 
+#=======================Booster========================
+signal startLaser
+signal stopLaser
+
+func BoostSpaceship():
+	speed = Boost_Speed
+	startLaser.emit()
+	
+func StopBoostSpaceship():
+	speed = original_speed
+	stopLaser.emit()
+#===========================================================
 func activate_Shield():
 	if(shield_On): return
 	print("Shield Activated!!")

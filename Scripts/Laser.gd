@@ -6,11 +6,15 @@ extends Node2D
 
 var laser_status = false
 # Maximum length of the laser
-var max_length: float = 500.0
+var max_length: float = 1000.0
+var spaceship
 
 func _ready() -> void:
 	# Set the initial length of the laser
 	print("Laser is started!!")
+	spaceship = get_node("../")
+	spaceship.connect("stopLaser",Stop_Laser)
+	spaceship.connect("startLaser",Start_Laser)
 	#update_laser()
 
 func _process(delta: float) -> void:
@@ -37,6 +41,7 @@ func Start_Laser():
 	laser_status = true
 	
 func Stop_Laser():
+	print("Stopping Laser!!!!!")
 	laser_status = false
 	line.points = [Vector2.ZERO, Vector2.ZERO]
 
@@ -44,7 +49,7 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			print("Left mouse button clicked")
-			Start_Laser()
+			#Start_Laser()
 		elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			print("Right mouse button clicked")
-			Stop_Laser()
+			#Stop_Laser()

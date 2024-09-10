@@ -46,9 +46,23 @@ func add_point():
 	planet_points += 1
 	point_label.text = str("Points: ",planet_points)
 	GlobalVariables.add_point()
-	#SaveAndLoad.Save_PlayerData(GlobalVariables.SaveType.Points)
+	var type = SavingTypeList.new()
+	type.type_list["Points"] = true
+	SaveAndLoad.Save_PlayerData(type)
 	
-
+func Use_Boosters():
+	if(GlobalVariables.Boosters == 0):
+		print("Not Enough Boosters To use!!")
+		$PauseMenu.show_pauseMenu("NotEnoughCoins")
+		return
+	
+	print("Boosters USED!!")
+	GlobalVariables.deduct_Boosters()
+	var type = SavingTypeList.new()
+	type.type_list["Points"] = true
+	type.type_list["Boosters"] = true
+	SaveAndLoad.Save_PlayerData(type)
+	BoostSpeed.emit()
 
 	
 	
@@ -62,6 +76,7 @@ signal pausingGame
 signal stoppingGame
 signal GameIsOver
 signal settingSpeed
+signal BoostSpeed
 #============================
 func start_game():
 	startingGame.emit()

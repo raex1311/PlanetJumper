@@ -59,6 +59,22 @@ offset_bottom = 139.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Booster Points" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -498.0
+offset_right = 100.0
+offset_bottom = -448.0
+grow_horizontal = 2
+grow_vertical = 0
+bbcode_enabled = true
+text = "[center] Booster Points: "
+
 [node name="Buy Shield" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -92,6 +108,22 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Buy Points"
 
+[node name="Buy Boosters" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -55.0
+offset_top = -433.0
+offset_right = 55.0
+offset_bottom = -402.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Buy Boosters"
+
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="start_button_pressed"]
 [connection signal="button_down" from="Buy Shield" to="Shop" method="Buy_Shield"]
 [connection signal="pressed" from="Buy Points" to="Shop" method="Buy_Points"]
+[connection signal="pressed" from="Buy Boosters" to="Shop" method="Buy_Boosters"]

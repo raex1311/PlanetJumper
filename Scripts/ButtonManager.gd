@@ -15,3 +15,4 @@ func _ready() -> void:
 
 func OpenSettingsMenu():
 	pauseMenu.show_pauseMenu("SettingsMenu")
+	

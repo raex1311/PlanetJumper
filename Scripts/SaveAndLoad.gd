@@ -19,6 +19,7 @@ func Load_PlayerData():
 	playerData = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
 	GlobalVariables.globalpoints = playerData.points
 	GlobalVariables.HighScore = playerData.highscore
+	GlobalVariables.Boosters = playerData.Boosters
 	print("Points Loaded: ", playerData.points)
 	
 func Save_PlayerData(saveTypeList : SavingTypeList):
@@ -42,5 +43,8 @@ func update(saveType: String):
 		"ShieldTime":
 			playerData.change_shieldtime()
 			print("Changing ShieldTime!!")
+		"Boosters":
+			playerData.change_boosters(GlobalVariables.Boosters)
+			print("Adding Boosters!!")
 
 #=====================================================
