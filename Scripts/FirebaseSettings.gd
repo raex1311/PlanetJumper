@@ -26,15 +26,17 @@ func _on_high_score_fetched(result: int, response_code: int, headers: Array, bod
 		var body_string = body.get_string_from_utf8()  # Convert body to string
 		
 		var json = JSON.new()  # Create an instance of the JSON class
-		var highscores = json.parse(body_string)  # Parse JSON response
+		var parse_result = json.parse_string(body_string)# Parse JSON response
 		
-		if highscores.error == OK:  # Ensure JSON parsing was successful
-			var score_data = highscores.result
-			for player_id in score_data.keys():
-				var player = score_data[player_id]
-				print("Top Player: ", player["name"], " Score: ", player["score"])
+		if(parse_result is Dictionary):
+			print("Top Player: ", " Score: ",parse_result.values())
+			var score = parse_result.values()
+			var scoreString = score[0]
+			var name = scoreString["name"]
+			var actualScore = scoreString["score"]
+			print("Name: ",name," Score: ",actualScore)
 		else:
-			print("Error parsing JSON: ", highscores.error)
+			print("Error parsing JSON: ", parse_result)
 	else:
 		print("Error fetching high score: ", response_code)
 

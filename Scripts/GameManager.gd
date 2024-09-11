@@ -82,6 +82,7 @@ func start_game():
 	startingGame.emit()
 	
 func set_speed(r_speed: float, d_speed : float):
+	print("Setting Speed: r=",r_speed," d=",d_speed )
 	planet_rotation_speed = r_speed
 	downward_moving_speed = d_speed
 	settingSpeed.emit()
@@ -104,14 +105,6 @@ func GameOver():
 	game_is_over = true
 	$GameOverScreen.visible = true
 	GameIsOver.emit()
-	
-func Change_Difficulty(difficulty : int):
-	if(difficulty == 1):
-		print("Difficulty Set to : 1")
-	elif(difficulty==2):
-		print("Difficulty Set to : 2")
-	elif(difficulty==3):
-		print("Difficulty Set to : 3")
 
 #================= Meteor pooling========================
 func Add_meteor_to_pool():

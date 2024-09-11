@@ -11,6 +11,7 @@ func _ready():
 	position.y = randf_range(-800,-1200)
 	position.x = randf_range(-10,10)
 	set_speed()
+	game_Manager.settingSpeed.connect(set_speed)
 	
 	#linear_velocity = Vector2(0,speed)
 	#set_angular_velocity(10)
@@ -36,3 +37,6 @@ func change_rotation_values(downspeed: float,planet_rotation_speed : float):
 func set_speed():
 	speed = game_Manager.downward_moving_speed
 	rotation_speed = game_Manager.planet_rotation_speed
+
+func randomizePlanet():
+	pass

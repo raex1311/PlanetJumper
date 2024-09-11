@@ -13,6 +13,7 @@ func _ready():
 	background_height = BG1.texture.get_size().y
 	BG2.position.y = BG1.position.y - background_height
 	BG3.position.y = BG2.position.y - background_height
+	game_Manager.settingSpeed.connect(changespeed)
 
 func _process(delta):
 	if(game_Manager.game_is_over):
@@ -29,3 +30,6 @@ func _process(delta):
 		
 	if(BG3.position.y > get_viewport().size.y + background_height):
 		BG3.position.y = BG2.position.y - background_height
+
+func changespeed():
+	speed = game_Manager.downward_moving_speed

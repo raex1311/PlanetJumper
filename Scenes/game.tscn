@@ -1,6 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://bdmppjpfodq7j"]
+[gd_scene load_steps=20 format=3 uid="uid://bdmppjpfodq7j"]
 
-[ext_resource type="PackedScene" uid="uid://btmmhcglgp64n" path="res://Scenes/Planet.tscn" id="1_tx5vb"]
+[ext_resource type="PackedScene" uid="uid://btmmhcglgp64n" path="res://Scenes/Planet1.tscn" id="1_tx5vb"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_vpq13"]
 [ext_resource type="Script" path="res://Scripts/Spaceship.gd" id="2_anbfd"]
 [ext_resource type="PackedScene" uid="uid://cek487f24avmw" path="res://Scenes/spaceship.tscn" id="2_wh45f"]
@@ -13,6 +13,12 @@
 [ext_resource type="PackedScene" uid="uid://dmupes8gps0ij" path="res://Scenes/PauseMenu.tscn" id="11_feymk"]
 [ext_resource type="Script" path="res://Scripts/ButtonManager.gd" id="12_3kma4"]
 [ext_resource type="Script" path="res://Scripts/FirebaseSettings.gd" id="13_djwbg"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/StateMachine.gd" id="14_0jcd5"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/DifficultyState1.gd" id="15_1hgr0"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/DifficultyState2.gd" id="16_nucjy"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/DifficultyState3.gd" id="17_pqtlj"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/DifficultyState4.gd" id="18_gtcsy"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/DifficultyState5.gd" id="19_iwv6a"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_vpq13")
@@ -73,7 +79,7 @@ offset_right = 317.0
 offset_bottom = 207.0
 color = Color(1, 1, 1, 0.407843)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="GameHUD/Timer" node_paths=PackedStringArray("FirebaseManager")]
+[node name="RichTextLabel" type="RichTextLabel" parent="GameHUD/Timer" node_paths=PackedStringArray("FirebaseManager", "StateManager")]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -85,10 +91,8 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Hello There General Kenobi"
 script = ExtResource("8_ngh32")
-DifficultyLimit1 = 6
-DifficultyLimit2 = 12
-DifficultyLimit3 = 18
 FirebaseManager = NodePath("../../../FirebaseManager")
+StateManager = NodePath("../../../StateManager")
 
 [node name="Points" type="ColorRect" parent="GameHUD"]
 layout_mode = 0
@@ -223,6 +227,45 @@ SettingsButton = NodePath("../GameHUD/Settings")
 [node name="FirebaseManager" type="Node2D" parent="."]
 script = ExtResource("13_djwbg")
 
+[node name="StateManager" type="Node2D" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("14_0jcd5")
+initial_state = NodePath("Difficulty1")
+
+[node name="Difficulty1" type="Node2D" parent="StateManager" node_paths=PackedStringArray("gameManager")]
+script = ExtResource("15_1hgr0")
+next_state = "Difficulty2"
+gameManager = NodePath("../..")
+r_speed = 100
+d_speed = 100
+
+[node name="Difficulty2" type="Node2D" parent="StateManager" node_paths=PackedStringArray("gameManager")]
+script = ExtResource("16_nucjy")
+next_state = "Difficulty3"
+gameManager = NodePath("../..")
+r_speed = 105
+d_speed = 150
+
+[node name="Difficulty3" type="Node2D" parent="StateManager" node_paths=PackedStringArray("gameManager")]
+script = ExtResource("17_pqtlj")
+next_state = "Difficulty4"
+gameManager = NodePath("../..")
+r_speed = 110
+d_speed = 200
+
+[node name="Difficulty4" type="Node2D" parent="StateManager" node_paths=PackedStringArray("gameManager")]
+script = ExtResource("18_gtcsy")
+next_state = "Difficulty5"
+gameManager = NodePath("../..")
+r_speed = 115
+d_speed = 250
+
+[node name="Difficulty5" type="Node2D" parent="StateManager" node_paths=PackedStringArray("gameManager")]
+script = ExtResource("19_iwv6a")
+gameManager = NodePath("../..")
+r_speed = 120
+d_speed = 300
+
+[connection signal="child_exiting_tree" from="Earth" to="Earth" method="on_spaceship_exit"]
 [connection signal="timeout" from="Earth/TheSpaceship/ShieldTimer" to="Earth/TheSpaceship" method="deactivate_Shield"]
 [connection signal="pressed" from="GameHUD/Booster" to="." method="Use_Boosters"]
 [connection signal="pressed" from="GameOverScreen/Button" to="." method="Goto_MainMenu"]
