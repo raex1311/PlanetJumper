@@ -13,6 +13,7 @@ var original_speed = 200
 var Boost_Speed = 900
 var gameManager
 var gameOver = false
+var Life : int = 2
 
 func _ready():
 	current_planet = get_node(".").get_parent()
@@ -80,7 +81,6 @@ func StopBoostSpaceship():
 #===========================================================
 func activate_Shield():
 	if(shield_On): return
-	print("Shield Activated!!")
 	shield_On = true
 	shield.visible = true
 	var timer = $ShieldTimer
@@ -91,6 +91,13 @@ func activate_Shield():
 	
 	
 func deactivate_Shield():
-	print("Shield Deactivated!!")
 	shield_On = false
 	shield.visible = false
+	
+#==================LIFE======================================
+func DeductLife():
+	print("Deducted Life!!:--", Life)
+	if Life == 1:
+		gameManager.GameOver()
+	elif Life > 1 :
+		Life = Life - 1

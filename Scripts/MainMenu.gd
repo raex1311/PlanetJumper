@@ -11,7 +11,6 @@ func _ready():
 func Refresh_Stored_Data():
 	$PointLabel.text = str("Points: ",GlobalVariables.globalpoints)
 	$HighScore.text = str("High Score: ", GlobalVariables.HighScore)
-	print("This is the end!!")
 	if(SaveAndLoad.playerData.shieldTime!=null):
 		print("Shield Time: ", SaveAndLoad.playerData.shieldTime)
 		GlobalVariables.Shield_Time = SaveAndLoad.playerData.shieldTime

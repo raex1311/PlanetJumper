@@ -7,13 +7,11 @@ func _ready() -> void:
 	hide_subMenu()
 	
 func show_pauseMenu(menuType : String):
-	print("Pausing!!!!")
 	get_node(".").visible = true
 	show_subMenu(menuType)
 	gameManager.pause_game()
 
 func hide_pauseMenu():
-	print("Resuming!!!!!!!")
 	get_node(".").visible = false
 	hide_subMenu()
 	gameManager.pause_game()

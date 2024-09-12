@@ -3,10 +3,11 @@ var speed = 0
 var screen_size
 var rotation_speed = 0
 var game_Manager : Node2D
+var Planet_Manager : Node2D
+var gameInitialized = false
 
-
-func _ready():
-	game_Manager = get_node("../")
+func ___ready():
+	game_Manager = get_parent()
 	screen_size = get_viewport_rect().size
 	position.y = randf_range(-800,-1200)
 	position.x = randf_range(-10,10)
@@ -15,8 +16,18 @@ func _ready():
 	
 	#linear_velocity = Vector2(0,speed)
 	#set_angular_velocity(10)
+func Initialize():
+	Planet_Manager = get_parent()
+	game_Manager = Planet_Manager.game_Manager
+	screen_size = get_viewport_rect().size
+	position.y = randf_range(-800,-1200)
+	position.x = randf_range(-10,10)
+	set_speed()
+	game_Manager.settingSpeed.connect(set_speed)
+	gameInitialized = true
 
 func _process(delta):
+	if !gameInitialized: return
 	if(game_Manager.game_is_over):
 		return
 	position.y += speed * delta

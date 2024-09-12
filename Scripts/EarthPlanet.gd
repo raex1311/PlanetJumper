@@ -13,11 +13,9 @@ func _process(delta):
 	rotation_degrees += rotation_speed * delta
 
 func on_spaceship_exit(body : Node):
-	print("Earth Exited~~-----------------------------------------------")
 	if body.is_in_group("spaceships"):
 		DestroyEarth()
 		
 		
 func DestroyEarth():
-	print("Earth Destroyed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	self.visible = false

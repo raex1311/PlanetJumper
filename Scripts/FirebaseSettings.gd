@@ -90,6 +90,7 @@ func _on_score_updated(result: int, response_code: int, headers: Array, body: Pa
 
 #Function to fetch the player's score from Firebase
 func fetch_my_score():
+	print("Fetching My Score!!")
 	var http_request = HTTPRequest.new()
 	add_child(http_request)
 	

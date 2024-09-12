@@ -7,7 +7,6 @@ func Buy_Shield():
 	if(GlobalVariables.globalpoints < Shield_Price):
 		print("Not enough points to buy!!")
 		return
-	print("Bought Points!!")
 	GlobalVariables.deduct_point(10)
 	GlobalVariables.add_ShieldTime()
 	var type = SavingTypeList.new()

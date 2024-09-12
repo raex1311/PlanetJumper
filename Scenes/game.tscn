@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bdmppjpfodq7j"]
+[gd_scene load_steps=21 format=3 uid="uid://bdmppjpfodq7j"]
 
 [ext_resource type="PackedScene" uid="uid://btmmhcglgp64n" path="res://Scenes/Planet1.tscn" id="1_tx5vb"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_vpq13"]
@@ -19,11 +19,13 @@
 [ext_resource type="Script" path="res://Scripts/StateMachine/DifficultyState3.gd" id="17_pqtlj"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/DifficultyState4.gd" id="18_gtcsy"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/DifficultyState5.gd" id="19_iwv6a"]
+[ext_resource type="Script" path="res://Scripts/PlanetManager.gd" id="20_m6ub6"]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("timer")]
 script = ExtResource("1_vpq13")
 falling_object_scene = ExtResource("1_tx5vb")
 meteor = ExtResource("9_lceoo")
+timer = NodePath("Timer")
 
 [node name="Background" parent="." instance=ExtResource("8_nk0yu")]
 position = Vector2(1, -1545)
@@ -32,14 +34,14 @@ position = Vector2(1, -1545)
 position = Vector2(1, -4)
 
 [node name="Planet" parent="." instance=ExtResource("1_tx5vb")]
-position = Vector2(1, -252)
+position = Vector2(4, 101)
 scale = Vector2(0.06, 0.06)
 
 [node name="DeathWall" parent="." instance=ExtResource("4_c0wpf")]
 position = Vector2(-538.99, -963.08)
 
 [node name="Earth" parent="." instance=ExtResource("3_7ex4b")]
-position = Vector2(5.96046e-08, -0.999998)
+position = Vector2(1.26218e-29, 566)
 
 [node name="TheSpaceship" parent="Earth" groups=["spaceships"] instance=ExtResource("2_wh45f")]
 position = Vector2(-3.8147e-06, -1233.33)
@@ -264,6 +266,11 @@ script = ExtResource("19_iwv6a")
 gameManager = NodePath("../..")
 r_speed = 120
 d_speed = 300
+
+[node name="PlanetManager" type="Node2D" parent="." node_paths=PackedStringArray("game_Manager")]
+position = Vector2(-1080, -1080)
+script = ExtResource("20_m6ub6")
+game_Manager = NodePath("..")
 
 [connection signal="child_exiting_tree" from="Earth" to="Earth" method="on_spaceship_exit"]
 [connection signal="timeout" from="Earth/TheSpaceship/ShieldTimer" to="Earth/TheSpaceship" method="deactivate_Shield"]

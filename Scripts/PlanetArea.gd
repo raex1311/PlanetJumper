@@ -9,10 +9,9 @@ func _ready() -> void:
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("spaceships"):
 		if(body_has_entered):
-			Gamemanager.add_point()
+			#Gamemanager.add_point()
 			body_has_entered = false
 			body.StopBoostSpaceship()
-			print("Spaceship has Landed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 			
 		body.on_planet = true
 		body.current_planet = get_parent()

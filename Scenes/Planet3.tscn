@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cvlp6qf7xiojd"]
 
 [ext_resource type="Script" path="res://Scripts/Planet.gd" id="1_4454x"]
-[ext_resource type="Texture2D" uid="uid://c6m51p6qofuv4" path="res://Images/PlanetArt.png" id="2_n4b12"]
+[ext_resource type="Texture2D" uid="uid://6fbgaxapmpo7" path="res://Images/PlanetArt3.png" id="2_f1pmt"]
 [ext_resource type="Script" path="res://Scripts/PlanetArea.gd" id="3_keqe8"]
 [ext_resource type="Texture2D" uid="uid://cupbvjf5oav7t" path="res://Images/spaceship.jpg" id="4_dak2s"]
 
@@ -20,7 +20,7 @@ shape = SubResource("CircleShape2D_s6x5n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.435, 0.435)
-texture = ExtResource("2_n4b12")
+texture = ExtResource("2_f1pmt")
 
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2(1.465, 1.465)

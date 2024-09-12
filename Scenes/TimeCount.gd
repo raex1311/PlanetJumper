@@ -49,7 +49,6 @@ func DifficultyChange():
 
 func AddHighScore():
 	if(int(time_elapsed) > GlobalVariables.HighScore):
-		print("Adding High Score!!")
 		GlobalVariables.HighScore = int(time_elapsed)
 		var type = SavingTypeList.new()
 		type.type_list["HighScore"] = true

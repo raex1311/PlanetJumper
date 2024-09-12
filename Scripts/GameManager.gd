@@ -2,6 +2,7 @@ extends Node2D
 
 @export var falling_object_scene : PackedScene 
 @export var meteor : PackedScene
+@export var timer : Timer
 var gap_percentage = 10
 var meteorCount = 10
 var meteorPool = []
@@ -23,7 +24,7 @@ func _ready():
 	timer.timeout.connect(_on_Timer_timeout)
 	point_label = $GameHUD/Points/RichTextLabel
 	Add_meteor_to_pool()
-	spawn_Planet()
+	#spawn_Planet() #------ Needed for Spawing the Planets -----#
 	
 func _on_Timer_timeout():
 	spawn_meteor()
@@ -82,7 +83,6 @@ func start_game():
 	startingGame.emit()
 	
 func set_speed(r_speed: float, d_speed : float):
-	print("Setting Speed: r=",r_speed," d=",d_speed )
 	planet_rotation_speed = r_speed
 	downward_moving_speed = d_speed
 	settingSpeed.emit()
