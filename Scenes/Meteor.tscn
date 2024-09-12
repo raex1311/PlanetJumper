@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dnprg3wvkod85"]
 
 [ext_resource type="Script" path="res://Scripts/MeteorManager.gd" id="1_5nvdh"]
-[ext_resource type="Texture2D" uid="uid://dc630qcqfmeic" path="res://Images/Meteor.jpg" id="1_s4nj8"]
+[ext_resource type="Texture2D" uid="uid://3xmllji13w15" path="res://Images/MeteorWithoutBG.png" id="2_57skg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o1wxo"]
 
@@ -10,10 +10,10 @@ scale = Vector2(0.225, 0.225)
 script = ExtResource("1_5nvdh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_s4nj8")
+texture = ExtResource("2_57skg")
 
 [node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
-position = Vector2(0, 22.2222)
+position = Vector2(35.5556, -4.44444)
 collision_layer = 3
 collision_mask = 3
 

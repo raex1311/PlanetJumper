@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://y8jq1mps054j"]
 
 [ext_resource type="Script" path="res://Scripts/EarthPlanet.gd" id="1_1xg5u"]
-[ext_resource type="Texture2D" uid="uid://bx8sauumtc7qj" path="res://Images/planet.jpg" id="2_c56pi"]
+[ext_resource type="Texture2D" uid="uid://b503smh1xgj3h" path="res://Images/Earth.png" id="2_vdtya"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s6x5n"]
 
@@ -9,7 +9,7 @@
 radius = 584.94
 
 [node name="Planet" type="Area2D"]
-scale = Vector2(0.03, 0.03)
+scale = Vector2(0.04, 0.04)
 script = ExtResource("1_1xg5u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -17,7 +17,8 @@ scale = Vector2(78.755, 78.755)
 shape = SubResource("CircleShape2D_s6x5n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_c56pi")
+scale = Vector2(3.145, 3.145)
+texture = ExtResource("2_vdtya")
 
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2(1.465, 1.465)

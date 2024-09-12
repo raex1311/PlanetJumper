@@ -1,6 +1,6 @@
 extends Area2D
 var speed = 100
-var rotation_speed = 1
+var rotation_speed = 100
 
 
 	

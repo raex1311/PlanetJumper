@@ -34,17 +34,17 @@ position = Vector2(1, -1545)
 position = Vector2(1, -4)
 
 [node name="Planet" parent="." instance=ExtResource("1_tx5vb")]
-position = Vector2(4, 101)
+position = Vector2(-849, 101)
 scale = Vector2(0.06, 0.06)
 
 [node name="DeathWall" parent="." instance=ExtResource("4_c0wpf")]
 position = Vector2(-538.99, -963.08)
 
 [node name="Earth" parent="." instance=ExtResource("3_7ex4b")]
-position = Vector2(1.26218e-29, 566)
+position = Vector2(0, -4)
 
 [node name="TheSpaceship" parent="Earth" groups=["spaceships"] instance=ExtResource("2_wh45f")]
-position = Vector2(-3.8147e-06, -1233.33)
+position = Vector2(0, -1525)
 scale = Vector2(33.3333, 33.3333)
 script = ExtResource("2_anbfd")
 
