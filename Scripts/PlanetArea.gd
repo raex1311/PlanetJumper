@@ -2,6 +2,7 @@ extends Area2D
 
 var body_has_entered = true
 var Gamemanager
+@export var spacesp : Node2D
 
 func _ready() -> void:
 	Gamemanager = get_node("../../")
@@ -18,4 +19,5 @@ func _on_Area2D_body_entered(body):
 		body.landed = true
 		body.circle_position = global_position
 		body.circle_radius = $CollisionShape2D.shape.radius
-		body.set_spaceship_position(get_child(1).global_position,get_child(1).global_rotation)
+		#body.set_spaceship_position(get_child(1).global_position,get_child(1).global_rotation)
+		body.set_spaceship_position(spacesp.global_position,spacesp.global_rotation)

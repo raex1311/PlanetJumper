@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bdmppjpfodq7j"]
+[gd_scene load_steps=25 format=3 uid="uid://bdmppjpfodq7j"]
 
 [ext_resource type="PackedScene" uid="uid://btmmhcglgp64n" path="res://Scenes/Planet1.tscn" id="1_tx5vb"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_vpq13"]
@@ -20,6 +20,17 @@
 [ext_resource type="Script" path="res://Scripts/StateMachine/DifficultyState4.gd" id="18_gtcsy"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/DifficultyState5.gd" id="19_iwv6a"]
 [ext_resource type="Script" path="res://Scripts/PlanetManager.gd" id="20_m6ub6"]
+[ext_resource type="Shader" path="res://Scripts/P_shader.gdshader" id="21_vjlt4"]
+[ext_resource type="Script" path="res://Scripts/Procedural Generation/P_Placeholder.gd" id="22_qe8qy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ol847"]
+shader = ExtResource("21_vjlt4")
+shader_parameter/planet_center = null
+shader_parameter/planet_radius = 100.0
+shader_parameter/ocean_color = Color(0, 0.2, 0.7, 1)
+shader_parameter/land_color = Color(0.2, 0.8, 0.1, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_nsuni"]
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("timer")]
 script = ExtResource("1_vpq13")
@@ -28,7 +39,7 @@ meteor = ExtResource("9_lceoo")
 timer = NodePath("Timer")
 
 [node name="Background" parent="." instance=ExtResource("8_nk0yu")]
-position = Vector2(1, -1545)
+position = Vector2(10, -1545)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1, -4)
@@ -271,6 +282,16 @@ d_speed = 300
 position = Vector2(-1080, -1080)
 script = ExtResource("20_m6ub6")
 game_Manager = NodePath("..")
+
+[node name="Procedural" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ol847")
+position = Vector2(-246, 109)
+script = ExtResource("22_qe8qy")
+
+[node name="P" type="Sprite2D" parent="Procedural"]
+position = Vector2(147.75, 153.75)
+scale = Vector2(105.5, 93.5)
+texture = SubResource("CanvasTexture_nsuni")
 
 [connection signal="child_exiting_tree" from="Earth" to="Earth" method="on_spaceship_exit"]
 [connection signal="timeout" from="Earth/TheSpaceship/ShieldTimer" to="Earth/TheSpaceship" method="deactivate_Shield"]

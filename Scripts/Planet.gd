@@ -32,13 +32,13 @@ func _process(delta):
 		return
 	position.y += speed * delta
 	rotation_degrees += rotation_speed * delta
-	if (position.y > screen_size.y):
+	if (position.y > screen_size.y + 200):
 		reset_position()
 	   
 
 func reset_position():
 	position.y = randf_range(-800,-1200)
-	position.x = randf_range(-450,450)
+	position.x = randf_range(-430,430)
 
 func change_rotation_values(downspeed: float,planet_rotation_speed : float):
 	speed = downspeed

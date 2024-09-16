@@ -2,7 +2,7 @@ extends Node
 
 var globalpoints : int
 var HighScore : int
-var Shield_Time : int = 2
+var Shield_Time : int
 var Boosters : int
 
 func add_point():

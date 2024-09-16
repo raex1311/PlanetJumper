@@ -106,6 +106,7 @@ func GameOver():
 	$GameOverScreen.visible = true
 	GameIsOver.emit()
 
+#region Meteor Pooling
 #================= Meteor pooling========================
 func Add_meteor_to_pool():
 	for i in range(meteorCount):
@@ -118,3 +119,4 @@ func get_meteor():
 		if not meteor.is_active:
 			return meteor
 #========================================================
+#endregion

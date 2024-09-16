@@ -48,10 +48,14 @@ var gap = 0
 func spawn_planet():
 	var planet_type = get_random_planet_type()
 	var planet = get_from_pool(planet_type)
+	print("Planet Type: ", planet_type)
 	var gap_percentage = 10
 	var screen_size = get_viewport_rect().size
 	if planet:
-		planet.global_position = Vector2(randf_range(-450,450), randf_range(-(screen_size.y/gap_percentage) - 200 - gap,-(screen_size.y/gap_percentage)- 400 - gap)) # Randomize the spawn position
+		if(planet_type == 0):
+			planet.global_position = Vector2(randf_range(-420,420), randf_range(-(screen_size.y/gap_percentage) - 200 - gap,-(screen_size.y/gap_percentage)- 400 - gap)) # Randomize the spawn position
+		elif(planet_type == 1 || planet_type == 2):
+			planet.global_position = Vector2(randf_range(-370,370), randf_range(-(screen_size.y/gap_percentage) - 200 - gap,-(screen_size.y/gap_percentage)- 400 - gap)) # Randomize the spawn position
 		planet.show()  # Make the planet visible
 		gap+=400
 
