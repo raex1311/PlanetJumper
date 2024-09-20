@@ -302,6 +302,7 @@ position = Vector2(-416, -852)
 texture = ExtResource("23_7ojrm")
 
 [node name="Experiment" parent="." instance=ExtResource("24_tbkwg")]
+visible = false
 position = Vector2(-517, -968)
 
 [connection signal="child_exiting_tree" from="Earth" to="Earth" method="on_spaceship_exit"]
