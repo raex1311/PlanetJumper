@@ -1,9 +1,7 @@
 extends Node2D
 
 func generate_noise_texture(size: Vector2i, scale: float) -> ImageTexture:
-	var img = Image.new()
-	img.create(128,128,false,Image.FORMAT_RGBA8) # Grayscale format for noise
-	await get_tree().create_timer(5.0).timeout
+	var img = Image.create(256,256,false,Image.FORMAT_RGBA8) # Grayscale format for noise
 	var noise = FastNoiseLite.new()
 	noise.seed = int(randf() * 1000000)
 
@@ -20,8 +18,19 @@ func generate_noise_texture(size: Vector2i, scale: float) -> ImageTexture:
 	return texture
 
 var image : Sprite2D
+var shader_material : ShaderMaterial
+var screen
+
 
 func _ready() -> void:
 	image = $P
 	var v = Vector2i(2,2)
-	image.texture =await generate_noise_texture(v, 1)
+	screen = get_viewport_rect().size
+	var noise_texture =generate_noise_texture(v, 10)
+	#image.texture = noise_texture
+	shader_material = $P.material as ShaderMaterial
+	#shader_material.set_shader_parameter("noise_texture", noise_texture)
+	#99shader_material.set_shader_parameter("planet_center", Vector2(screen.x/2,screen.y/2))
+	shader_material.set_shader_parameter("planet_radius", 71)
+	
+	print("Noise Texture: ", shader_material.get_shader_parameter("noise_texture"), "  ", image.texture)

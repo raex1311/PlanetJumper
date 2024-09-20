@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://dllbb8xydjhwn"]
+
+[ext_resource type="Script" path="res://Scripts/Procedural Generation/P_Placeholder.gd" id="1_cu0fh"]
+[ext_resource type="Shader" path="res://Scripts/Procedural Generation/P_shader.gdshader" id="2_viruo"]
+[ext_resource type="Texture2D" uid="uid://c7fkhu1wi2jwa" path="res://Scripts/Procedural Generation/images.png" id="3_xxr30"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_q8ny7"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_la82a"]
+noise = SubResource("FastNoiseLite_q8ny7")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_01vnw"]
+shader = ExtResource("2_viruo")
+shader_parameter/planet_center = Vector2(128, 128)
+shader_parameter/planet_radius = 100.0
+shader_parameter/ocean_color = Color(0, 0.2, 0.7, 1)
+shader_parameter/land_color = Color(0.2, 0.8, 0.1, 1)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_la82a")
+
+[node name="Experiment" type="Node2D"]
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("1_cu0fh")
+
+[node name="P" type="Sprite2D" parent="Node2D"]
+material = SubResource("ShaderMaterial_01vnw")
+position = Vector2(130.25, 126.813)
+texture = ExtResource("3_xxr30")

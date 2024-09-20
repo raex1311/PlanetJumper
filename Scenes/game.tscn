@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bdmppjpfodq7j"]
+[gd_scene load_steps=28 format=3 uid="uid://bdmppjpfodq7j"]
 
 [ext_resource type="PackedScene" uid="uid://btmmhcglgp64n" path="res://Scenes/Planet1.tscn" id="1_tx5vb"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_vpq13"]
@@ -20,17 +20,25 @@
 [ext_resource type="Script" path="res://Scripts/StateMachine/DifficultyState4.gd" id="18_gtcsy"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/DifficultyState5.gd" id="19_iwv6a"]
 [ext_resource type="Script" path="res://Scripts/PlanetManager.gd" id="20_m6ub6"]
-[ext_resource type="Shader" path="res://Scripts/P_shader.gdshader" id="21_vjlt4"]
+[ext_resource type="Shader" path="res://Scripts/Procedural Generation/P_shader.gdshader" id="21_vjlt4"]
 [ext_resource type="Script" path="res://Scripts/Procedural Generation/P_Placeholder.gd" id="22_qe8qy"]
+[ext_resource type="Texture2D" uid="uid://c7fkhu1wi2jwa" path="res://Scripts/Procedural Generation/images.png" id="23_7ojrm"]
+[ext_resource type="PackedScene" uid="uid://dllbb8xydjhwn" path="res://Scenes/experiment.tscn" id="24_tbkwg"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ol847"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kova2"]
+seed = 20
+frequency = 0.0245
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7csns"]
+noise = SubResource("FastNoiseLite_kova2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k5hg4"]
 shader = ExtResource("21_vjlt4")
-shader_parameter/planet_center = null
+shader_parameter/planet_center = Vector2(128, 128)
 shader_parameter/planet_radius = 100.0
-shader_parameter/ocean_color = Color(0, 0.2, 0.7, 1)
-shader_parameter/land_color = Color(0.2, 0.8, 0.1, 1)
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_nsuni"]
+shader_parameter/ocean_color = Color(0.428714, 0.20161, 0.171786, 1)
+shader_parameter/land_color = Color(0.343644, 0.268808, 0.434178, 1)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_7csns")
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("timer")]
 script = ExtResource("1_vpq13")
@@ -283,15 +291,18 @@ position = Vector2(-1080, -1080)
 script = ExtResource("20_m6ub6")
 game_Manager = NodePath("..")
 
-[node name="Procedural" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_ol847")
-position = Vector2(-246, 109)
+[node name="PlanetNode" type="Node2D" parent="."]
+visible = false
 script = ExtResource("22_qe8qy")
 
-[node name="P" type="Sprite2D" parent="Procedural"]
-position = Vector2(147.75, 153.75)
-scale = Vector2(105.5, 93.5)
-texture = SubResource("CanvasTexture_nsuni")
+[node name="P" type="Sprite2D" parent="PlanetNode"]
+z_index = 1
+material = SubResource("ShaderMaterial_k5hg4")
+position = Vector2(-416, -852)
+texture = ExtResource("23_7ojrm")
+
+[node name="Experiment" parent="." instance=ExtResource("24_tbkwg")]
+position = Vector2(-517, -968)
 
 [connection signal="child_exiting_tree" from="Earth" to="Earth" method="on_spaceship_exit"]
 [connection signal="timeout" from="Earth/TheSpaceship/ShieldTimer" to="Earth/TheSpaceship" method="deactivate_Shield"]

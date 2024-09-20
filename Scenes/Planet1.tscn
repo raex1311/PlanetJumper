@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://btmmhcglgp64n"]
+[gd_scene load_steps=8 format=3 uid="uid://btmmhcglgp64n"]
 
 [ext_resource type="Script" path="res://Scripts/Planet.gd" id="1_xriq0"]
 [ext_resource type="Texture2D" uid="uid://c6m51p6qofuv4" path="res://Images/PlanetArt.png" id="2_1ymmx"]
 [ext_resource type="Script" path="res://Scripts/PlanetArea.gd" id="3_o70ge"]
 [ext_resource type="Texture2D" uid="uid://cupbvjf5oav7t" path="res://Images/spaceship.jpg" id="4_bamrl"]
+[ext_resource type="PackedScene" uid="uid://o40717x7bf34" path="res://Scripts/Procedural Generation/planetshader/planetshader.tscn" id="5_gm32h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s6x5n"]
 
@@ -19,6 +20,7 @@ scale = Vector2(85.66, 85.66)
 shape = SubResource("CircleShape2D_s6x5n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 scale = Vector2(0.435, 0.435)
 texture = ExtResource("2_1ymmx")
 
@@ -35,6 +37,10 @@ spacesp = NodePath("../Spacesp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_oxmdv")
+
+[node name="Planet" parent="." instance=ExtResource("5_gm32h")]
+position = Vector2(0, 0)
+scale = Vector2(6.7, 6.7)
 
 [connection signal="body_entered" from="." to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_Area2D_body_entered"]
