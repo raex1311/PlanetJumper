@@ -5,12 +5,12 @@ var Gamemanager
 @export var spacesp : Node2D
 
 func _ready() -> void:
-	Gamemanager = get_node("../../")
+	Gamemanager = get_node("../../../")
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("spaceships"):
 		if(body_has_entered):
-			#Gamemanager.add_point()
+			Gamemanager.add_point()
 			body_has_entered = false
 			body.StopBoostSpaceship()
 			
