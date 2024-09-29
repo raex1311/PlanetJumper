@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dp6smdq8x17kg"]
+[gd_scene load_steps=5 format=3 uid="uid://dp6smdq8x17kg"]
 
 [ext_resource type="Script" path="res://Scripts/DeathBorder.gd" id="1_fmp12"]
+[ext_resource type="Script" path="res://Scenes/Detect_meteor.gd" id="2_o3arh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_58duh"]
 size = Vector2(1080, 70)
@@ -39,7 +40,30 @@ script = ExtResource("1_fmp12")
 position = Vector2(1054, 959.5)
 shape = SubResource("RectangleShape2D_lpjbv")
 
+[node name="Detect Meteor Left" type="Area2D" parent="."]
+position = Vector2(-95, -22)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("2_o3arh")
+myside = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detect Meteor Left"]
+position = Vector2(1054, 959.5)
+shape = SubResource("RectangleShape2D_lpjbv")
+
+[node name="Detect Meteor Right" type="Area2D" parent="."]
+position = Vector2(-892, -22)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("2_o3arh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detect Meteor Right"]
+position = Vector2(1054, 959.5)
+shape = SubResource("RectangleShape2D_lpjbv")
+
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="Area2D3" to="Area2D3" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="Area2D4" to="Area2D4" method="_on_Area2D_body_entered"]
+[connection signal="area_entered" from="Detect Meteor Left" to="Detect Meteor Left" method="_on_body2d_Enter"]
+[connection signal="area_entered" from="Detect Meteor Right" to="Detect Meteor Right" method="_on_body2d_Enter"]

@@ -61,4 +61,7 @@ func set_speed():
 
 func randomizePlanet():
 	if(thePlanet):
+		var num = Planet_Manager.get_child(randf_range(0,9))
+		if(num):
+			thePlanet.randomColor = num
 		thePlanet.randomize()

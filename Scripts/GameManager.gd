@@ -1,11 +1,9 @@
 extends Node2D
 
 @export var falling_object_scene : PackedScene 
-@export var meteor : PackedScene
 @export var timer : Timer
 var gap_percentage = 10
-var meteorCount = 10
-var meteorPool = []
+
 var planet_count = 0
 var planet_points = 0
 
@@ -23,11 +21,10 @@ func _ready():
 	var timer = get_node("Timer")
 	timer.timeout.connect(_on_Timer_timeout)
 	point_label = $GameHUD/Points/RichTextLabel
-	Add_meteor_to_pool()
 	#spawn_Planet() #------ Needed for Spawing the Planets -----#
 	
 func _on_Timer_timeout():
-	spawn_meteor()
+	pass
 	
 func spawn_Planet():
 	var gap = 0
@@ -39,9 +36,7 @@ func spawn_Planet():
 		falling_object.position = Vector2(randf_range(-450,450), randf_range(-(screen_size.y/gap_percentage) - 200 - gap,-(screen_size.y/gap_percentage)- 400 - gap))
 		gap+=400
 		
-func spawn_meteor():
-	var meteor = get_meteor()
-	meteor.initialize()
+
 
 func add_point():
 	planet_points += 1
@@ -105,19 +100,3 @@ func GameOver():
 	game_is_over = true
 	$GameOverScreen.visible = true
 	GameIsOver.emit()
-
-#region Meteor Pooling
-#================= Meteor pooling========================
-func Add_meteor_to_pool():
-	for i in range(meteorCount):
-		var meteor = meteor.instantiate()
-		add_child(meteor)
-		meteorPool.append(meteor)
-		
-func get_meteor():
-	for meteor in meteorPool:
-		if not meteor.is_active:
-			return meteor
-			
-#========================================================
-#endregion

@@ -15,9 +15,9 @@ radius = 584.94
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nhhob"]
 resource_local_to_scene = true
 shader = ExtResource("6_ye3le")
-shader_parameter/heighest_landmass = 1.0
-shader_parameter/lowest_landmass = 0.0
-shader_parameter/landmass = 1.0
+shader_parameter/heighest_landmass = 0.335
+shader_parameter/lowest_landmass = 0.19
+shader_parameter/landmass = 1.69
 shader_parameter/density = 5.0
 shader_parameter/seed = 1337.0
 shader_parameter/iResolution = Vector2(64, 64)

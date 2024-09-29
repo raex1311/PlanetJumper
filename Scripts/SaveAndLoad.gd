@@ -27,7 +27,7 @@ func Save_PlayerData(saveTypeList : SavingTypeList):
 	var allKeys = saveTypeList.type_list.keys()
 	for x in allKeys:
 		if(saveTypeList.type_list[x] == true):
-			print("True:->", x)
+			#print("True:->", x)
 			update(x)
 	ResourceSaver.save(playerData,save_file_path + save_file_name)
 	DataIsSaving.emit()

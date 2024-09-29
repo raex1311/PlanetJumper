@@ -10,6 +10,7 @@ var planet_scenes = [
 # Pool dictionary to store inactive planets
 var object_pool: Dictionary = {}
 
+
 # Probability list, e.g., 50% chance for Planet1, 30% for Planet2, 20% for Planet3
 var spawn_probabilities = [0.5, 0.3, 0.2]
 

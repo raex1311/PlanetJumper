@@ -1,65 +1,56 @@
 extends Node2D
 
 var gameManager : Node2D
+@export var meteor : PackedScene
 var side = false
 var is_active = false
 var spaceship : Node2D
+var meteorCount = 10
+var meteorPool = []
+var timer : Timer
+var min_meteor_Timer : float = 10
+var max_meteor_Timer : float = 20
+var meteorSpawned : bool
 
 func _ready():
 	gameManager = get_node("../")
-	destroy_meteor()
-
-
-func _process(delta):
-	if(gameManager.game_is_over): return
+	Add_meteor_to_pool()
+	timer = $M_Timer as Timer
+	timer.timeout.connect(_on_Timer_timeout)
+	change_meteor_timer()
+	print("Meteor Manager Loaded----------------------")
 	
-	if(side==false):
-		position.x -= 100 * delta
-	else:
-		position.x += 100 * delta
 
-func _on_area_2d_body_entered(body):
-	if body.is_in_group("spaceships"):
-		spaceship = body
-		if !body.shield_On:
-			spaceship.DeductLife()
-			destroy_meteor()
-		else:
-			destroy_meteor()
+func change_meteor_timer():
+	if(timer):
+		timer.wait_time = randf_range(min_meteor_Timer,max_meteor_Timer)
+	
 
-func destroy_meteor():
-	is_active = false
-	#visible = false
-	#set_process(false)
-	#set_physics_process(false)
-	#set_process_input(false)
-	#process_mode = Node.PROCESS_MODE_DISABLED
-	self.hide()
+func _on_Timer_timeout():
+	spawn_meteor()
 	
-	
-func initialize():
-	is_active = true
-	#visible = true
-	#set_process(true)
-	#set_physics_process(true)
-	#set_process_input(true)	
-	#process_mode = Node.PROCESS_MODE_INHERIT
-	self.show()
-	var x = randf_range(0,2)
-	if(int(x)==0):
-		side = true
-		spawn_left()
+func spawn_meteor():
+	print("Spawning Meteor!!---------------------")
+	var meteor = get_meteor()
+	if(!meteor): return
+	meteor.initialize()
+
+#region Meteor Pooling
+#================= Meteor pooling========================
+func Add_meteor_to_pool():
+	for i in range(meteorCount):
+		var meteor = meteor.instantiate()
+		add_child(meteor)
+		meteorPool.append(meteor)
+	meteorSpawned = true
 		
-	elif(int(x)==1):
-		side = false
-		spawn_right()
-		
-	
-	
-func spawn_left():
-	position.y = randf_range(-800,800)
-	position.x = randf_range(-1090,-1100)
-	
-func spawn_right():
-	position.y = randf_range(-800,800)
-	position.x = randf_range(1090,1100)
+func get_meteor():
+	if(meteorPool.size() > 0):
+		for meteor in meteorPool:
+			if not meteor.is_active:
+				return meteor
+
+func send_meteorBackToPool(meteor : Node2D):
+	meteorPool.append(meteor)
+#========================================================
+#endregion
