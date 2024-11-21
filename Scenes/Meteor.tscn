@@ -1,25 +1,54 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnprg3wvkod85"]
+[gd_scene load_steps=9 format=3 uid="uid://dnprg3wvkod85"]
 
 [ext_resource type="Script" path="res://Scripts/Meteor.gd" id="1_ym0xn"]
-[ext_resource type="Texture2D" uid="uid://3xmllji13w15" path="res://Images/MeteorWithoutBG.png" id="2_57skg"]
+[ext_resource type="Texture2D" uid="uid://cd204nxo4eoek" path="res://Images/New Meteor.png" id="2_mlysw"]
+[ext_resource type="Texture2D" uid="uid://c4jj2f02gc7ny" path="res://Images/Flame.png" id="3_s00bv"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_o1wxo"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_6gk45"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_m7lrp"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_3d1uv"]
+offsets = PackedFloat32Array(0, 0.104167, 0.825521, 1)
+colors = PackedColorArray(0.960784, 0.658824, 0, 0.027451, 0.945593, 0.605796, 7.01907e-08, 1, 0.825198, 0.185556, 6.26452e-07, 1, 0.815686, 0.14902, 0, 0.0823529)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6w5so"]
+gradient = SubResource("Gradient_3d1uv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rj3xf"]
+particle_flag_disable_z = true
+angle_min = 13.5
+angle_max = 81.0
+direction = Vector3(0, 0, 0)
+spread = 16.703
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.5
+color_ramp = SubResource("GradientTexture1D_6w5so")
 
 [node name="Meteor" type="Node2D"]
 scale = Vector2(0.225, 0.225)
 script = ExtResource("1_ym0xn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_57skg")
+texture = ExtResource("2_mlysw")
 
 [node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
-position = Vector2(35.5556, -4.44444)
 collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-146.667, 4.44444)
-scale = Vector2(14.895, 14.895)
-shape = SubResource("CircleShape2D_o1wxo")
+scale = Vector2(8.46667, 8.1111)
+shape = SubResource("CircleShape2D_6gk45")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_m7lrp")
+process_material = SubResource("ParticleProcessMaterial_rj3xf")
+texture = ExtResource("3_s00bv")
+lifetime = 3.0
+speed_scale = 2.0
+randomness = 0.43
+fixed_fps = 60
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

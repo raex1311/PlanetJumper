@@ -1,15 +1,74 @@
-[gd_scene load_steps=4 format=3 uid="uid://cek487f24avmw"]
+[gd_scene load_steps=14 format=3 uid="uid://cek487f24avmw"]
 
 [ext_resource type="Script" path="res://Scripts/Laser.gd" id="1_7cjmu"]
-[ext_resource type="Texture2D" uid="uid://cupbvjf5oav7t" path="res://Images/spaceship.jpg" id="1_wauvi"]
+[ext_resource type="Texture2D" uid="uid://b8oqatpn7x7rg" path="res://Images/Spaceship.png" id="1_phei1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oabbq"]
+
+[sub_resource type="Gradient" id="Gradient_c2vkh"]
+colors = PackedColorArray(1, 0.945098, 0, 1, 0.823109, 0.153981, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ltkd5"]
+gradient = SubResource("Gradient_c2vkh")
+
+[sub_resource type="Curve" id="Curve_0wv1n"]
+_data = [Vector2(0, 1), 0.0, -0.688526, 0, 1, Vector2(1, 0.311474), -0.688526, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_kh8tp"]
+curve = SubResource("Curve_0wv1n")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kitbm"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(3, 1, 1)
+direction = Vector3(0, 1, 0)
+spread = 1.0
+initial_velocity_min = 15.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = -2.23517e-06
+scale_min = 4.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_kh8tp")
+color_ramp = SubResource("GradientTexture1D_ltkd5")
+
+[sub_resource type="Gradient" id="Gradient_q707k"]
+colors = PackedColorArray(0.887625, 0.924222, 0.978061, 1, 0.494118, 0.345098, 0.909804, 0.803922)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_uopl3"]
+gradient = SubResource("Gradient_q707k")
+
+[sub_resource type="Curve" id="Curve_07qx0"]
+_data = [Vector2(0, 0.264618), 0.0, 2.34172, 0, 1, Vector2(0.314035, 1), 0.0, 0.0, 0, 0, Vector2(0.377193, 1), 0.0, 0.0, 0, 0, Vector2(0.480702, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.122747), -1.6893, 0.0, 1, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_xhyd6"]
+curve = SubResource("Curve_07qx0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ybjtf"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(3, 1, 1)
+direction = Vector3(0, 1, 0)
+spread = 0.0
+flatness = 0.039
+initial_velocity_min = 7.21
+initial_velocity_max = 72.7
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = -2.23517e-06
+scale_min = 6.0
+scale_max = 7.0
+scale_curve = SubResource("CurveTexture_xhyd6")
+color_ramp = SubResource("GradientTexture1D_uopl3")
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.03, 0.03)
-texture = ExtResource("1_wauvi")
+texture = ExtResource("1_phei1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_oabbq")
@@ -23,3 +82,17 @@ default_color = Color(0.47451, 1, 0.85098, 1)
 
 [node name="RayCast2D" type="RayCast2D" parent="Node2D"]
 collide_with_areas = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+position = Vector2(0, 19)
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_kitbm")
+speed_scale = 6.8
+
+[node name="HighBoostParticle" type="GPUParticles2D" parent="."]
+position = Vector2(0, 19)
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_ybjtf")
+lifetime = 2.0
+speed_scale = 13.44
