@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://cek487f24avmw"]
+[gd_scene load_steps=15 format=3 uid="uid://cek487f24avmw"]
 
 [ext_resource type="Script" path="res://Scripts/Laser.gd" id="1_7cjmu"]
 [ext_resource type="Texture2D" uid="uid://b8oqatpn7x7rg" path="res://Images/Spaceship.png" id="1_phei1"]
+[ext_resource type="Script" path="res://Scenes/JetFuel.gd" id="3_funwt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oabbq"]
 
@@ -83,16 +84,21 @@ default_color = Color(0.47451, 1, 0.85098, 1)
 [node name="RayCast2D" type="RayCast2D" parent="Node2D"]
 collide_with_areas = true
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="Particles" type="Node2D" parent="." node_paths=PackedStringArray("normalfuel", "boostedfuel")]
+script = ExtResource("3_funwt")
+normalfuel = NodePath("GPUParticles2D")
+boostedfuel = NodePath("HighBoostParticle")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Particles"]
 visible = false
 position = Vector2(0, 19)
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_kitbm")
 speed_scale = 6.8
 
-[node name="HighBoostParticle" type="GPUParticles2D" parent="."]
+[node name="HighBoostParticle" type="GPUParticles2D" parent="Particles"]
 position = Vector2(0, 19)
-amount = 32
+amount = 100
 process_material = SubResource("ParticleProcessMaterial_ybjtf")
 lifetime = 2.0
-speed_scale = 13.44
+speed_scale = 20.4

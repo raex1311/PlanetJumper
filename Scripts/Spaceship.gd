@@ -73,6 +73,7 @@ signal stopLaser
 
 func BoostSpaceship():
 	speed = Boost_Speed
+	_startBoostedJetfuel()
 	startLaser.emit()
 	
 func StopBoostSpaceship():
@@ -101,3 +102,21 @@ func DeductLife():
 		gameManager.GameOver()
 	elif Life > 1 :
 		Life = Life - 1
+		
+#================JETFUEL====================================
+signal startJetFuel
+signal stopJetFuel
+signal startNormalJetfuel
+signal startBoostedJetfuel
+
+func _startJetFuel():
+	startJetFuel.emit()
+	
+func _stopJetFuel():
+	stopJetFuel.emit()
+	
+func _startNormalJetfuel():
+	startNormalJetfuel.emit()
+	
+func _startBoostedJetfuel():
+	startBoostedJetfuel.emit()
