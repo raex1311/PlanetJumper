@@ -52,6 +52,7 @@ func _physics_process(delta):
 		onEarth = false
 		if(current_planet!=null):
 			get_node(".").reparent(current_planet.get_parent())
+			_startJetFuel() #Starting Jet fuel when spaceship leaves the planet
 		current_planet = null
 
 func _rotateby180():
@@ -78,6 +79,8 @@ func BoostSpaceship():
 	
 func StopBoostSpaceship():
 	speed = original_speed
+	_stopJetFuel() #Stopping the jetfuel when landed
+	_startNormalJetfuel() #setting jetfuel to normal
 	stopLaser.emit()
 #===========================================================
 func activate_Shield():

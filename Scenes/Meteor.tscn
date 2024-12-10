@@ -21,7 +21,7 @@ particle_flag_disable_z = true
 angle_min = 13.5
 angle_max = 81.0
 direction = Vector3(0, 0, 0)
-spread = 16.703
+spread = 17.311
 gravity = Vector3(0, 0, 0)
 scale_min = 0.5
 scale_max = 0.5
@@ -50,5 +50,6 @@ lifetime = 3.0
 speed_scale = 2.0
 randomness = 0.43
 fixed_fps = 60
+trail_lifetime = 0.5
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

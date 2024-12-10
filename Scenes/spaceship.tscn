@@ -84,21 +84,23 @@ default_color = Color(0.47451, 1, 0.85098, 1)
 [node name="RayCast2D" type="RayCast2D" parent="Node2D"]
 collide_with_areas = true
 
-[node name="Particles" type="Node2D" parent="." node_paths=PackedStringArray("normalfuel", "boostedfuel")]
+[node name="JetFuel" type="Node2D" parent="." node_paths=PackedStringArray("normalfuel", "boostedfuel")]
 script = ExtResource("3_funwt")
 normalfuel = NodePath("GPUParticles2D")
 boostedfuel = NodePath("HighBoostParticle")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Particles"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="JetFuel"]
 visible = false
 position = Vector2(0, 19)
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_kitbm")
 speed_scale = 6.8
+local_coords = true
 
-[node name="HighBoostParticle" type="GPUParticles2D" parent="Particles"]
+[node name="HighBoostParticle" type="GPUParticles2D" parent="JetFuel"]
 position = Vector2(0, 19)
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_ybjtf")
 lifetime = 2.0
 speed_scale = 20.4
+local_coords = true
