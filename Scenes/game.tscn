@@ -29,7 +29,7 @@ falling_object_scene = ExtResource("1_tx5vb")
 timer = NodePath("Timer")
 
 [node name="Background" parent="." instance=ExtResource("8_nk0yu")]
-position = Vector2(10, -1545)
+position = Vector2(0, -1500)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1, -4)

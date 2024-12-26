@@ -9,8 +9,8 @@ func _ready():
 	SaveAndLoad.DataIsSaving.connect(Refresh_Stored_Data)
 
 func Refresh_Stored_Data():
-	$PointLabel.text = str("Points: ",GlobalVariables.globalpoints)
-	$HighScore.text = str("High Score: ", GlobalVariables.HighScore)
+	$Panel/ColorRect/PointLabel.text = str("Points: ",GlobalVariables.globalpoints)
+	$Panel/ColorRect/HighScore.text = str("High Score: ", GlobalVariables.HighScore)
 	if(SaveAndLoad.playerData.shieldTime!=null):
 		print("Shield Time: ", SaveAndLoad.playerData.shieldTime)
 		GlobalVariables.Shield_Time = SaveAndLoad.playerData.shieldTime
@@ -22,7 +22,7 @@ func Refresh_Stored_Data():
 		GlobalVariables.Shield_Time = SaveAndLoad.playerData.Boosters
 	else:
 		print("There is no any boosters!!")
-	$"Booster Points".text = str("Booster Points: ",GlobalVariables.Boosters)
+	$Panel/ColorRect/"Booster Points".text = str("Booster Points: ",GlobalVariables.Boosters)
 
 	
 func start_button_pressed():

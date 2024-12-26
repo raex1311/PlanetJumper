@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://btpmrtqurv82x"]
+[gd_scene load_steps=11 format=3 uid="uid://btpmrtqurv82x"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_pa3dl"]
 [ext_resource type="Script" path="res://Scripts/Shop.gd" id="2_exrl1"]
@@ -6,6 +6,18 @@
 [ext_resource type="Texture2D" uid="uid://igpg4mni31vx" path="res://Images/New Game Button (1).png" id="3_7xcpu"]
 [ext_resource type="FontFile" uid="uid://xmpx3ananbw8" path="res://Fonts/Meteoric-light.otf" id="4_5e6j0"]
 [ext_resource type="Texture2D" uid="uid://32nnnpukb4bv" path="res://Images/Glow Button.png" id="4_yf0eu"]
+
+[sub_resource type="FontVariation" id="FontVariation_kdxq1"]
+base_font = ExtResource("4_5e6j0")
+variation_embolden = 1.5
+
+[sub_resource type="FontVariation" id="FontVariation_4t68n"]
+base_font = ExtResource("4_5e6j0")
+variation_embolden = 1.23
+
+[sub_resource type="FontVariation" id="FontVariation_jsqbd"]
+base_font = ExtResource("4_5e6j0")
+variation_embolden = 1.5
 
 [sub_resource type="FontVariation" id="FontVariation_1nx73"]
 base_font = ExtResource("4_5e6j0")
@@ -43,14 +55,67 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 90.0
 grow_horizontal = 2
-color = Color(0.329412, 0.403922, 0.411765, 1)
+color = Color(0, 0, 0, 0.607843)
+
+[node name="PointLabel" type="RichTextLabel" parent="Panel/ColorRect"]
+modulate = Color(0.47451, 0.988235, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 25.0
+offset_top = -20.0
+offset_right = 225.0
+offset_bottom = 20.0
+grow_vertical = 2
+theme_override_fonts/normal_font = SubResource("FontVariation_kdxq1")
+theme_override_font_sizes/normal_font_size = 20
+
+[node name="HighScore" type="RichTextLabel" parent="Panel/ColorRect"]
+modulate = Color(0.47451, 0.988235, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -20.0
+offset_right = 100.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = SubResource("FontVariation_4t68n")
+theme_override_font_sizes/normal_font_size = 20
+
+[node name="Booster Points" type="RichTextLabel" parent="Panel/ColorRect"]
+modulate = Color(0.47451, 0.988235, 0.929412, 1)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -214.255
+offset_top = -25.0
+offset_right = -14.255
+offset_bottom = 25.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/normal_font = SubResource("FontVariation_jsqbd")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center] Booster Points: "
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-offset_left = 38.0
-offset_top = 1430.0
-offset_right = 429.0
-offset_bottom = 1877.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -447.0
+offset_right = 416.0
+grow_vertical = 0
 
 [node name="Start" type="Button" parent="VBoxContainer"]
 visible = false
@@ -118,49 +183,30 @@ theme_override_font_sizes/normal_font_size = 25
 bbcode_enabled = true
 text = "[center]Options[/center]"
 
-[node name="PointLabel" type="RichTextLabel" parent="."]
+[node name="Shop" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_7xcpu")
+texture_pressed = ExtResource("4_yf0eu")
+stretch_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/Shop"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 180.0
-offset_bottom = 20.0
+offset_left = -104.5
+offset_top = -18.0
+offset_right = 55.5
+offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="HighScore" type="RichTextLabel" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = 99.0
-offset_right = 180.0
-offset_bottom = 139.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Booster Points" type="RichTextLabel" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -498.0
-offset_right = 100.0
-offset_bottom = -448.0
-grow_horizontal = 2
-grow_vertical = 0
+theme_override_colors/default_color = Color(0.909804, 0.654902, 0.337255, 1)
+theme_override_fonts/normal_font = SubResource("FontVariation_1nx73")
+theme_override_font_sizes/normal_font_size = 25
 bbcode_enabled = true
-text = "[center] Booster Points: "
+text = "[center]Shop[/center]"
 
 [node name="Buy Shield" type="Button" parent="."]
 layout_mode = 1
