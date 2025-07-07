@@ -13,7 +13,7 @@ blend_mode = 1
 offsets = PackedFloat32Array(0, 0.104167, 0.825521, 1)
 colors = PackedColorArray(0.960784, 0.658824, 0, 0.027451, 0.945593, 0.605796, 7.01907e-08, 1, 0.825198, 0.185556, 6.26452e-07, 1, 0.815686, 0.14902, 0, 0.0823529)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_6w5so"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ppn67"]
 gradient = SubResource("Gradient_3d1uv")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rj3xf"]
@@ -25,7 +25,7 @@ spread = 17.311
 gravity = Vector3(0, 0, 0)
 scale_min = 0.5
 scale_max = 0.5
-color_ramp = SubResource("GradientTexture1D_6w5so")
+color_ramp = SubResource("GradientTexture1D_ppn67")
 
 [node name="Meteor" type="Node2D"]
 scale = Vector2(0.225, 0.225)

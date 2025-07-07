@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://btpmrtqurv82x"]
+[gd_scene load_steps=12 format=3 uid="uid://btpmrtqurv82x"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_pa3dl"]
 [ext_resource type="Script" path="res://Scripts/Shop.gd" id="2_exrl1"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://igpg4mni31vx" path="res://Images/New Game Button (1).png" id="3_7xcpu"]
 [ext_resource type="FontFile" uid="uid://xmpx3ananbw8" path="res://Fonts/Meteoric-light.otf" id="4_5e6j0"]
 [ext_resource type="Texture2D" uid="uid://32nnnpukb4bv" path="res://Images/Glow Button.png" id="4_yf0eu"]
+[ext_resource type="PackedScene" uid="uid://cvyfsfu760j68" path="res://Scenes/ShopPanel.tscn" id="7_ore62"]
 
 [sub_resource type="FontVariation" id="FontVariation_kdxq1"]
 base_font = ExtResource("4_5e6j0")
@@ -152,6 +153,7 @@ offset_right = 55.5
 offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_colors/default_color = Color(0.909804, 0.654902, 0.337255, 1)
 theme_override_fonts/normal_font = SubResource("FontVariation_1nx73")
 theme_override_font_sizes/normal_font_size = 25
@@ -177,6 +179,7 @@ offset_right = 55.5
 offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_colors/default_color = Color(0.909804, 0.654902, 0.337255, 1)
 theme_override_fonts/normal_font = SubResource("FontVariation_1nx73")
 theme_override_font_sizes/normal_font_size = 25
@@ -202,6 +205,7 @@ offset_right = 55.5
 offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_colors/default_color = Color(0.909804, 0.654902, 0.337255, 1)
 theme_override_fonts/normal_font = SubResource("FontVariation_1nx73")
 theme_override_font_sizes/normal_font_size = 25
@@ -223,8 +227,9 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Buy Shield"
 
-[node name="Shop" type="Node2D" parent="."]
+[node name="Shop" type="Node2D" parent="." node_paths=PackedStringArray("shopPanel")]
 script = ExtResource("2_exrl1")
+shopPanel = NodePath("../ShopPanel")
 
 [node name="Buy Points" type="Button" parent="."]
 layout_mode = 1
@@ -240,6 +245,10 @@ offset_bottom = -551.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Buy Points"
+
+[node name="ShopPanel" parent="." instance=ExtResource("7_ore62")]
+visible = false
+layout_mode = 1
 
 [node name="Buy Boosters" type="Button" parent="."]
 layout_mode = 1
@@ -258,6 +267,8 @@ text = "Buy Boosters"
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/NewGame Button" to="." method="start_button_pressed"]
+[connection signal="button_down" from="VBoxContainer/Options Button" to="Shop" method="theconnection"]
+[connection signal="pressed" from="VBoxContainer/Shop" to="Shop" method="OpenShopPanel"]
 [connection signal="button_down" from="Buy Shield" to="Shop" method="Buy_Shield"]
 [connection signal="pressed" from="Buy Points" to="Shop" method="Buy_Points"]
 [connection signal="pressed" from="Buy Boosters" to="Shop" method="Buy_Boosters"]

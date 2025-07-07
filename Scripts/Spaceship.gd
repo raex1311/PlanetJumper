@@ -25,6 +25,12 @@ func _ready():
 
 func set_gameOver():
 	gameOver = true
+	
+func is_touch_on_ui(pos: Vector2) -> bool:
+	var hovered = get_viewport().gui_pick(pos)
+	return hovered != null and hovered is Control
+
+
 
 func _physics_process(delta):
 	if(gameOver): return

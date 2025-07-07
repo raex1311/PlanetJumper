@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bdmppjpfodq7j"]
+[gd_scene load_steps=24 format=3 uid="uid://bdmppjpfodq7j"]
 
 [ext_resource type="PackedScene" uid="uid://btmmhcglgp64n" path="res://Scenes/Planet1.tscn" id="1_tx5vb"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_vpq13"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cp7ghsqhtfsnu" path="res://Scenes/shield.tscn" id="8_qb8qs"]
 [ext_resource type="PackedScene" uid="uid://dnprg3wvkod85" path="res://Scenes/Meteor.tscn" id="9_lceoo"]
 [ext_resource type="PackedScene" uid="uid://dmupes8gps0ij" path="res://Scenes/PauseMenu.tscn" id="11_feymk"]
+[ext_resource type="Texture2D" uid="uid://pd0wmnrpmqlu" path="res://Images/Rectangle 13.png" id="11_gr6k5"]
 [ext_resource type="Script" path="res://Scripts/ButtonManager.gd" id="12_3kma4"]
 [ext_resource type="Script" path="res://Scripts/FirebaseSettings.gd" id="13_djwbg"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/StateMachine.gd" id="14_0jcd5"]
@@ -29,7 +30,7 @@ falling_object_scene = ExtResource("1_tx5vb")
 timer = NodePath("Timer")
 
 [node name="Background" parent="." instance=ExtResource("8_nk0yu")]
-position = Vector2(0, -1500)
+position = Vector2(0, -1274)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1, -4)
@@ -190,17 +191,33 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0.384314, 0.384314, 0.772549)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="GameOverScreen/Panel/ColorRect"]
+[node name="TextureRect" type="TextureRect" parent="GameOverScreen/Panel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -20.0
-offset_right = 50.0
-offset_bottom = 20.0
+offset_left = -291.0
+offset_top = -353.0
+offset_right = 299.0
+offset_bottom = 288.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_gr6k5")
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameOverScreen/Panel/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.5
+offset_top = -19.0
+offset_right = 45.5
+offset_bottom = 21.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Game Over"

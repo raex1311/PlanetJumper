@@ -1,10 +1,59 @@
-[gd_scene load_steps=5 format=3 uid="uid://dp6smdq8x17kg"]
+[gd_scene load_steps=15 format=3 uid="uid://dp6smdq8x17kg"]
 
 [ext_resource type="Script" path="res://Scripts/DeathBorder.gd" id="1_fmp12"]
+[ext_resource type="Texture2D" uid="uid://c4jj2f02gc7ny" path="res://Images/Flame.png" id="2_4vlqn"]
 [ext_resource type="Script" path="res://Scenes/Detect_meteor.gd" id="2_o3arh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_58duh"]
 size = Vector2(1080, 70)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2ushk"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_sc4rk"]
+offsets = PackedFloat32Array(0, 0.104167, 0.825521, 1)
+colors = PackedColorArray(0.960784, 0.658824, 0, 0.027451, 0.945593, 0.605796, 7.01907e-08, 1, 0.825198, 0.185556, 6.26452e-07, 1, 0.815686, 0.14902, 0, 0.0823529)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6w5so"]
+gradient = SubResource("Gradient_sc4rk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2md27"]
+particle_flag_disable_z = true
+angle_min = 13.5
+angle_max = 81.0
+direction = Vector3(0, 0, 0)
+spread = 17.311
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.5
+color_ramp = SubResource("GradientTexture1D_6w5so")
+
+[sub_resource type="Gradient" id="Gradient_nw752"]
+offsets = PackedFloat32Array(0, 0.467532, 0.996289)
+colors = PackedColorArray(1, 1, 0, 1, 1, 0.4, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_guebh"]
+gradient = SubResource("Gradient_nw752")
+
+[sub_resource type="Curve" id="Curve_c2agf"]
+_data = [Vector2(0.0138169, 0.960518), 0.0, 0.0, 0, 0, Vector2(0.981002, 0.165621), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_d03la"]
+curve = SubResource("Curve_c2agf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tddcd"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(500, 1, 1)
+direction = Vector3(1, -1, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_d03la")
+color_ramp = SubResource("GradientTexture1D_guebh")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lpjbv"]
 size = Vector2(52, 1777)
@@ -17,6 +66,50 @@ script = ExtResource("1_fmp12")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(540, 36)
 shape = SubResource("RectangleShape2D_58duh")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Area2D"]
+visible = false
+material = SubResource("CanvasItemMaterial_2ushk")
+position = Vector2(0, 353)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_2md27")
+texture = ExtResource("2_4vlqn")
+lifetime = 3.0
+speed_scale = 18.63
+randomness = 0.43
+fixed_fps = 60
+trail_lifetime = 0.5
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="Area2D"]
+visible = false
+position = Vector2(536, 1917)
+amount = 1000
+process_material = SubResource("ParticleProcessMaterial_tddcd")
+preprocess = 1.0
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="Area2D"]
+visible = false
+position = Vector2(545, 3)
+rotation = -3.14159
+amount = 1000
+process_material = SubResource("ParticleProcessMaterial_tddcd")
+preprocess = 1.0
+
+[node name="GPUParticles2D4" type="GPUParticles2D" parent="Area2D"]
+visible = false
+position = Vector2(-8, 590)
+rotation = -4.71239
+amount = 1000
+process_material = SubResource("ParticleProcessMaterial_tddcd")
+preprocess = 1.0
+
+[node name="GPUParticles2D5" type="GPUParticles2D" parent="Area2D"]
+visible = false
+position = Vector2(-8, 1364)
+rotation = -4.71239
+amount = 1000
+process_material = SubResource("ParticleProcessMaterial_tddcd")
+preprocess = 1.0
 
 [node name="Area2D2" type="Area2D" parent="."]
 position = Vector2(1, 201)
