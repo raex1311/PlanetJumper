@@ -22,14 +22,36 @@ func _ready():
 	shield = $Shield
 	deactivate_Shield()
 	gameManager.connect("GameIsOver", set_gameOver)
+	gameManager.connect("LeavePlanet",_leave_current_planet)
 
 func set_gameOver():
 	gameOver = true
 	
-func is_touch_on_ui(pos: Vector2) -> bool:
-	var hovered = get_viewport().gui_pick(pos)
-	return hovered != null and hovered is Control
+# Returns true if the tap/click landed on a UI Control
+func _input(event):
+	if event is InputEventMouseButton and event.pressed:
+		print("Leaving Planet now")
+		#_leave_current_planet()
 
+func is_ui_control_at_position(pos: Vector2, group_name: String) -> bool:
+	for node in get_tree().get_nodes_in_group(group_name):
+		if node is Control:
+			var rect: Rect2 = node.get_global_rect()
+			if rect.has_point(pos):
+				return true
+	print("Returning False!!")
+	return false
+	
+
+
+func _leave_current_planet():
+	print("Leaving Current Planet!!")
+	on_planet = false
+	onEarth = false
+	if current_planet:
+		reparent(current_planet.get_parent())  # same as get_node(".").reparent(...)
+		_startJetFuel()
+	current_planet = null
 
 
 func _physics_process(delta):
@@ -52,14 +74,18 @@ func _physics_process(delta):
 		position -= rotated_direction * speed * delta
 		#move_and_slide()
 
-	# Check for leaving the planet
-	if Input.is_action_just_pressed("leave_planet") and on_planet:
-		on_planet = false
-		onEarth = false
-		if(current_planet!=null):
-			get_node(".").reparent(current_planet.get_parent())
-			_startJetFuel() #Starting Jet fuel when spaceship leaves the planet
-		current_planet = null
+	  # Check for leaving the planet!
+	#if Input.is_action_just_pressed("leave_planet") and on_planet and !is_touch_on_ui(get_viewport().get_mouse_position()):
+		#on_planet = false
+		#onEarth = false
+		#if(current_planet!=null):
+			#get_node(".").reparent(current_planet.get_parent())
+			#_startJetFuel() #Starting Jet fuel when spaceship leaves the planet
+		#current_planet = null
+		
+		
+
+
 
 func _rotateby180():
 	rotation_degrees = rotation_degrees + 180

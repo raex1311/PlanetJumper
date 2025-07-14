@@ -7,7 +7,7 @@ var gap_percentage = 10
 var planet_count = 0
 var planet_points = 0
 
-var point_label
+@export var point_label : RichTextLabel
 
 #Global Variable
 #--------------------
@@ -20,7 +20,6 @@ var game_is_over = false
 func _ready():
 	var timer = get_node("Timer")
 	timer.timeout.connect(_on_Timer_timeout)
-	point_label = $GameHUD/Points/RichTextLabel
 	#spawn_Planet() #------ Needed for Spawing the Planets -----#
 	
 func _on_Timer_timeout():
@@ -39,6 +38,7 @@ func spawn_Planet():
 
 
 func add_point():
+	LandPlanet()
 	planet_points += 1
 	point_label.text = str("Points: ",planet_points)
 	GlobalVariables.add_point()
@@ -73,7 +73,25 @@ signal stoppingGame
 signal GameIsOver
 signal settingSpeed
 signal BoostSpeed
+signal UIClicked
+signal UIUnclikced
+signal LeavePlanet
+signal EnteredPlayArea
+signal ExitPlayArea
+signal LandedOnPlanet
 #============================
+func LandPlanet():
+	LandedOnPlanet.emit()
+	
+func LeaveThePlanet():
+	LeavePlanet.emit()
+
+func UIClick():
+	UIClicked.emit()
+
+func UIUnclick():
+	UIUnclikced.emit()
+
 func start_game():
 	startingGame.emit()
 	
@@ -100,3 +118,6 @@ func GameOver():
 	game_is_over = true
 	$GameOverScreen.visible = true
 	GameIsOver.emit()
+	
+func RestartGame():
+	get_tree().reload_current_scene()

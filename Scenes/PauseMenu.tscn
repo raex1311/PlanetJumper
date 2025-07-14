@@ -1,6 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmupes8gps0ij"]
+[gd_scene load_steps=13 format=3 uid="uid://dmupes8gps0ij"]
 
 [ext_resource type="Script" path="res://Scripts/PauseMenu.gd" id="1_ay8ll"]
+[ext_resource type="Texture2D" uid="uid://pd0wmnrpmqlu" path="res://Images/Rectangle 13.png" id="2_ly53g"]
+[ext_resource type="Texture2D" uid="uid://c33hsap4v6x2i" path="res://Images/Button Shop Filled.png" id="3_ptsio"]
+[ext_resource type="Texture2D" uid="uid://w6kesi4sf85q" path="res://Images/Button Shop Filled Highlighted.png" id="4_kyu1j"]
+[ext_resource type="FontFile" uid="uid://xmpx3ananbw8" path="res://Fonts/Meteoric-light.otf" id="5_px8he"]
+[ext_resource type="Texture2D" uid="uid://cgmpnndlpgbi7" path="res://Images/Sound.png" id="6_ypfmd"]
+[ext_resource type="Texture2D" uid="uid://chko35smr5wxr" path="res://Images/Music.png" id="7_xwllo"]
+[ext_resource type="Texture2D" uid="uid://boutywncuxwto" path="res://Images/Minus sign.png" id="8_c06he"]
+[ext_resource type="Texture2D" uid="uid://1ichvu7mmh04" path="res://Images/Progress Bar Empty.png" id="8_xb6gw"]
+[ext_resource type="Texture2D" uid="uid://lc7wdfug1u3v" path="res://Images/Filling 2.png" id="9_clyjp"]
+[ext_resource type="Texture2D" uid="uid://dlq6v55qtdkkk" path="res://Images/Plus sign.png" id="9_re0d0"]
+
+[sub_resource type="FontVariation" id="FontVariation_hp67q"]
+base_font = ExtResource("5_px8he")
+variation_embolden = 1.36
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
@@ -81,6 +95,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="Settings Menu"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -95,7 +110,22 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0.374187, 0.375577, 1)
 
-[node name="Resume Button" type="Button" parent="Settings Menu/ColorRect"]
+[node name="TextureRect" type="TextureRect" parent="Settings Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -330.0
+offset_top = -330.0
+offset_right = 330.0
+offset_bottom = 330.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ly53g")
+
+[node name="Resume Button" type="Button" parent="Settings Menu/TextureRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -110,5 +140,137 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Resume Game"
 
+[node name="LaunchButton" type="TextureButton" parent="Settings Menu/TextureRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -170.5
+offset_top = -109.8
+offset_right = 170.5
+offset_bottom = -29.8
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("3_ptsio")
+texture_pressed = ExtResource("4_kyu1j")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Settings Menu/TextureRect/LaunchButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.5
+offset_top = -18.0
+offset_right = 100.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.47451, 0.988235, 0.929412, 1)
+theme_override_fonts/normal_font = SubResource("FontVariation_hp67q")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[center]Resume[/center]"
+
+[node name="Sound" type="TextureRect" parent="Settings Menu/TextureRect"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 115.0
+offset_top = -242.0
+offset_right = 183.0
+offset_bottom = -174.0
+grow_vertical = 2
+texture = ExtResource("6_ypfmd")
+expand_mode = 1
+
+[node name="Music" type="TextureRect" parent="Settings Menu/TextureRect"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 108.0
+offset_top = -159.0
+offset_right = 176.0
+offset_bottom = -91.0
+grow_vertical = 2
+texture = ExtResource("7_xwllo")
+expand_mode = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Settings Menu/TextureRect"]
+layout_mode = 0
+offset_left = 265.0
+offset_top = 14.0
+offset_right = 513.0
+offset_bottom = 253.0
+value = 52.0
+nine_patch_stretch = true
+texture_under = ExtResource("8_xb6gw")
+texture_progress = ExtResource("9_clyjp")
+
+[node name="TextureProgressBar2" type="TextureProgressBar" parent="Settings Menu/TextureRect"]
+layout_mode = 0
+offset_left = 267.0
+offset_top = 88.0
+offset_right = 515.0
+offset_bottom = 327.0
+value = 52.0
+nine_patch_stretch = true
+texture_under = ExtResource("8_xb6gw")
+texture_progress = ExtResource("9_clyjp")
+
+[node name="TextureButton" type="TextureButton" parent="Settings Menu/TextureRect"]
+layout_mode = 0
+offset_left = 504.0
+offset_top = 106.0
+offset_right = 554.0
+offset_bottom = 151.0
+texture_normal = ExtResource("8_c06he")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="TextureButton3" type="TextureButton" parent="Settings Menu/TextureRect"]
+layout_mode = 0
+offset_left = 566.0
+offset_top = 107.0
+offset_right = 616.0
+offset_bottom = 152.0
+texture_normal = ExtResource("9_re0d0")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="TextureButton2" type="TextureButton" parent="Settings Menu/TextureRect"]
+layout_mode = 0
+offset_left = 504.0
+offset_top = 184.0
+offset_right = 554.0
+offset_bottom = 229.0
+texture_normal = ExtResource("8_c06he")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="TextureButton4" type="TextureButton" parent="Settings Menu/TextureRect"]
+layout_mode = 0
+offset_left = 570.0
+offset_top = 186.0
+offset_right = 620.0
+offset_bottom = 231.0
+texture_normal = ExtResource("9_re0d0")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings Menu/TextureRect"]
+layout_mode = 0
+offset_right = 540.0
+offset_bottom = 130.0
+
 [connection signal="pressed" from="Not Enough Coins/ColorRect/Resume Button" to="." method="hide_pauseMenu"]
-[connection signal="pressed" from="Settings Menu/ColorRect/Resume Button" to="." method="hide_pauseMenu"]
+[connection signal="pressed" from="Settings Menu/TextureRect/Resume Button" to="." method="hide_pauseMenu"]
+[connection signal="pressed" from="Settings Menu/TextureRect/LaunchButton" to="." method="hide_pauseMenu"]

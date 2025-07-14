@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bdmppjpfodq7j"]
+[gd_scene load_steps=34 format=3 uid="uid://bdmppjpfodq7j"]
 
 [ext_resource type="PackedScene" uid="uid://btmmhcglgp64n" path="res://Scenes/Planet1.tscn" id="1_tx5vb"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_vpq13"]
@@ -10,24 +10,38 @@
 [ext_resource type="PackedScene" uid="uid://dftml8jyodeb" path="res://Scenes/Background.tscn" id="8_nk0yu"]
 [ext_resource type="PackedScene" uid="uid://cp7ghsqhtfsnu" path="res://Scenes/shield.tscn" id="8_qb8qs"]
 [ext_resource type="PackedScene" uid="uid://dnprg3wvkod85" path="res://Scenes/Meteor.tscn" id="9_lceoo"]
+[ext_resource type="Texture2D" uid="uid://c33hsap4v6x2i" path="res://Images/Button Shop Filled.png" id="10_cgvha"]
 [ext_resource type="PackedScene" uid="uid://dmupes8gps0ij" path="res://Scenes/PauseMenu.tscn" id="11_feymk"]
-[ext_resource type="Texture2D" uid="uid://pd0wmnrpmqlu" path="res://Images/Rectangle 13.png" id="11_gr6k5"]
+[ext_resource type="Texture2D" uid="uid://w6kesi4sf85q" path="res://Images/Button Shop Filled Highlighted.png" id="11_tridr"]
 [ext_resource type="Script" path="res://Scripts/ButtonManager.gd" id="12_3kma4"]
+[ext_resource type="FontFile" uid="uid://xmpx3ananbw8" path="res://Fonts/Meteoric-light.otf" id="12_rhdys"]
+[ext_resource type="Texture2D" uid="uid://cwdvb06qmqulm" path="res://Images/Boosted.png" id="13_6lili"]
 [ext_resource type="Script" path="res://Scripts/FirebaseSettings.gd" id="13_djwbg"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/StateMachine.gd" id="14_0jcd5"]
+[ext_resource type="Texture2D" uid="uid://duigeawc2ehe7" path="res://Images/Shield.png" id="14_hf3un"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/DifficultyState1.gd" id="15_1hgr0"]
+[ext_resource type="Texture2D" uid="uid://cb2dbvlnek2vm" path="res://Images/Settings1.png" id="15_885cq"]
+[ext_resource type="Texture2D" uid="uid://0lwpqiugmqcn" path="res://Images/Settings2.png" id="16_7hlyi"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/DifficultyState2.gd" id="16_nucjy"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/DifficultyState3.gd" id="17_pqtlj"]
+[ext_resource type="Texture2D" uid="uid://c2756fk50il4y" path="res://Images/The Game Over 2.png" id="18_53o2v"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/DifficultyState4.gd" id="18_gtcsy"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/DifficultyState5.gd" id="19_iwv6a"]
 [ext_resource type="Script" path="res://Scripts/MeteorManager.gd" id="20_1bag3"]
 [ext_resource type="Script" path="res://Scripts/ColorClass.gd" id="20_l3k6l"]
 [ext_resource type="Script" path="res://Scripts/PlanetManager.gd" id="20_m6ub6"]
+[ext_resource type="Script" path="res://Scripts/SoundManager.gd" id="31_h8i3w"]
+[ext_resource type="AudioStream" uid="uid://komkgwmhu0rv" path="res://Sounds/769916__mellotrix9898__bling.wav" id="32_g143s"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("timer")]
+[sub_resource type="FontVariation" id="FontVariation_vwjje"]
+base_font = ExtResource("12_rhdys")
+variation_embolden = 1.36
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("timer", "point_label")]
 script = ExtResource("1_vpq13")
 falling_object_scene = ExtResource("1_tx5vb")
 timer = NodePath("Timer")
+point_label = NodePath("GameHUD/Points/RichTextLabel3")
 
 [node name="Background" parent="." instance=ExtResource("8_nk0yu")]
 position = Vector2(0, -1274)
@@ -76,46 +90,69 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 
 [node name="Timer" type="ColorRect" parent="GameHUD"]
-layout_mode = 0
-offset_left = 88.0
-offset_top = 129.0
-offset_right = 317.0
-offset_bottom = 207.0
-color = Color(1, 1, 1, 0.407843)
-
-[node name="RichTextLabel" type="RichTextLabel" parent="GameHUD/Timer" node_paths=PackedStringArray("FirebaseManager", "StateManager")]
 layout_mode = 1
-anchors_preset = 14
+offset_left = 16.0
+offset_top = 56.0
+offset_right = 368.0
+offset_bottom = 186.0
+color = Color(1, 1, 1, 0)
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="GameHUD/Timer" node_paths=PackedStringArray("FirebaseManager", "StateManager")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = -13.0
-offset_bottom = 17.0
+offset_left = -128.0
+offset_top = -37.0
+offset_right = 218.0
+offset_bottom = 87.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Hello There General Kenobi"
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.47451, 0.988235, 0.929412, 1)
+theme_override_fonts/normal_font = SubResource("FontVariation_vwjje")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "Score: 0"
 script = ExtResource("8_ngh32")
 FirebaseManager = NodePath("../../../FirebaseManager")
 StateManager = NodePath("../../../StateManager")
 
 [node name="Points" type="ColorRect" parent="GameHUD"]
-layout_mode = 0
-offset_left = 759.0
-offset_top = 124.0
-offset_right = 988.0
-offset_bottom = 202.0
-color = Color(1, 1, 1, 0.372549)
-
-[node name="RichTextLabel" type="RichTextLabel" parent="GameHUD/Points"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -114.0
+offset_top = 66.0
+offset_right = 115.0
+offset_bottom = 144.0
+grow_horizontal = 2
+color = Color(1, 1, 1, 0)
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="GameHUD/Points"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.5
+offset_top = -18.0
+offset_right = 100.5
+offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Hello There General Kenobi"
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.47451, 0.988235, 0.929412, 1)
+theme_override_fonts/normal_font = SubResource("FontVariation_vwjje")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[center]Points: 0[/center]"
 
-[node name="ActivateShieldButton" type="Button" parent="GameHUD"]
+[node name="ActivateShieldButton" type="Button" parent="GameHUD" groups=["ui"]]
 layout_mode = 0
 offset_left = 873.0
 offset_top = 1583.0
@@ -124,7 +161,7 @@ offset_bottom = 1591.0
 focus_mode = 0
 text = "Activate Shield"
 
-[node name="Settings" type="Button" parent="GameHUD"]
+[node name="Settings" type="Button" parent="GameHUD" groups=["ui"]]
 layout_mode = 0
 offset_left = 617.0
 offset_top = 1583.0
@@ -134,7 +171,7 @@ focus_mode = 0
 text = "Settings
 "
 
-[node name="Booster" type="Button" parent="GameHUD"]
+[node name="Booster" type="Button" parent="GameHUD" groups=["ui"]]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -149,6 +186,90 @@ grow_horizontal = 2
 grow_vertical = 0
 focus_mode = 0
 text = "Booster"
+
+[node name="LaunchButton" type="TextureButton" parent="GameHUD"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -163.5
+offset_top = -209.0
+offset_right = 177.5
+offset_bottom = -129.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("10_cgvha")
+texture_pressed = ExtResource("11_tridr")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="GameHUD/LaunchButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.5
+offset_top = -18.0
+offset_right = 100.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.47451, 0.988235, 0.929412, 1)
+theme_override_fonts/normal_font = SubResource("FontVariation_vwjje")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[center]Launch[/center]"
+
+[node name="BoosterButton" type="TextureButton" parent="GameHUD"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 59.0
+offset_top = -270.0
+offset_right = 152.0
+offset_bottom = -129.0
+grow_vertical = 0
+texture_normal = ExtResource("13_6lili")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="ShieldButton" type="TextureButton" parent="GameHUD"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -174.0
+offset_top = -271.0
+offset_right = -45.0
+offset_bottom = -129.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("14_hf3un")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="SettingsButton" type="TextureButton" parent="GameHUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -138.0
+offset_top = 30.0
+offset_right = -43.0
+offset_bottom = 128.0
+grow_horizontal = 0
+texture_normal = ExtResource("15_885cq")
+texture_pressed = ExtResource("16_7hlyi")
+ignore_texture_size = true
+stretch_mode = 4
 
 [node name="PauseMenu" parent="." instance=ExtResource("11_feymk")]
 visible = false
@@ -189,7 +310,7 @@ offset_right = 285.0
 offset_bottom = 280.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0.384314, 0.384314, 0.772549)
+color = Color(0, 0.384314, 0.384314, 0)
 
 [node name="TextureRect" type="TextureRect" parent="GameOverScreen/Panel"]
 layout_mode = 1
@@ -198,13 +319,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -291.0
-offset_top = -353.0
-offset_right = 299.0
-offset_bottom = 288.0
+offset_left = -400.0
+offset_top = -470.0
+offset_right = 400.0
+offset_bottom = 470.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("11_gr6k5")
+texture = ExtResource("18_53o2v")
 expand_mode = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="GameOverScreen/Panel/TextureRect"]
@@ -221,6 +342,79 @@ offset_bottom = 21.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Game Over"
+
+[node name="Main Menu Button" type="TextureButton" parent="GameOverScreen/Panel/TextureRect"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 33.0
+offset_top = -129.0
+offset_right = 374.0
+offset_bottom = -49.0
+grow_vertical = 0
+texture_normal = ExtResource("10_cgvha")
+texture_pressed = ExtResource("11_tridr")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="GameOverScreen/Panel/TextureRect/Main Menu Button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.5
+offset_top = -18.0
+offset_right = 100.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.47451, 0.988235, 0.929412, 1)
+theme_override_fonts/normal_font = SubResource("FontVariation_vwjje")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[center]Main Menu[/center]"
+
+[node name="Restart Button" type="TextureButton" parent="GameOverScreen/Panel/TextureRect"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -372.0
+offset_top = -132.0
+offset_right = -31.0
+offset_bottom = -52.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("10_cgvha")
+texture_pressed = ExtResource("11_tridr")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="GameOverScreen/Panel/TextureRect/Restart Button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.5
+offset_top = -18.0
+offset_right = 100.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.47451, 0.988235, 0.929412, 1)
+theme_override_fonts/normal_font = SubResource("FontVariation_vwjje")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[center]Restart[/center]"
 
 [node name="Button" type="Button" parent="GameOverScreen"]
 layout_mode = 1
@@ -241,8 +435,8 @@ text = "Main Menu"
 script = ExtResource("12_3kma4")
 spaceship = NodePath("../Earth/TheSpaceship")
 pauseMenu = NodePath("../PauseMenu")
-ActivateShieldButton = NodePath("../GameHUD/ActivateShieldButton")
-SettingsButton = NodePath("../GameHUD/Settings")
+ActivateShieldButton = NodePath("../GameHUD/ShieldButton")
+SettingsButton = NodePath("../GameHUD/SettingsButton")
 
 [node name="FirebaseManager" type="Node2D" parent="."]
 script = ExtResource("13_djwbg")
@@ -442,7 +636,22 @@ meteor = ExtResource("9_lceoo")
 [node name="M_Timer" type="Timer" parent="MeteorManager"]
 autostart = true
 
+[node name="SoundManager" type="Node2D" parent="." node_paths=PackedStringArray("GameManager")]
+script = ExtResource("31_h8i3w")
+Jump = ExtResource("32_g143s")
+GameManager = NodePath("..")
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="SoundManager"]
+
+[node name="SFXPlayer" type="AudioStreamPlayer2D" parent="SoundManager"]
+
 [connection signal="child_exiting_tree" from="Earth" to="Earth" method="on_spaceship_exit"]
 [connection signal="timeout" from="Earth/TheSpaceship/ShieldTimer" to="Earth/TheSpaceship" method="deactivate_Shield"]
+[connection signal="button_down" from="GameHUD/Booster" to="." method="UIClick"]
+[connection signal="button_up" from="GameHUD/Booster" to="." method="UIUnclick"]
 [connection signal="pressed" from="GameHUD/Booster" to="." method="Use_Boosters"]
+[connection signal="pressed" from="GameHUD/LaunchButton" to="." method="LeaveThePlanet"]
+[connection signal="pressed" from="GameHUD/BoosterButton" to="." method="Use_Boosters"]
+[connection signal="pressed" from="GameOverScreen/Panel/TextureRect/Main Menu Button" to="." method="Goto_MainMenu"]
+[connection signal="pressed" from="GameOverScreen/Panel/TextureRect/Restart Button" to="." method="RestartGame"]
 [connection signal="pressed" from="GameOverScreen/Button" to="." method="Goto_MainMenu"]

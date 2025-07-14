@@ -19,7 +19,7 @@ func _ready():
 	# Initialize the time_elapsed variable
 	time_elapsed = 0.0
 	# Set the initial text of the label to "Time elapsed: 0"
-	text = "Time elapsed: 0"
+	text = "Score: 0"
 	game_manager = get_node("../../../")
 	game_manager.connect("GameIsOver", AddHighScore)
 
@@ -29,7 +29,7 @@ func _process(delta):
 	# Update the time_elapsed variable
 	time_elapsed += delta
 	# Update the label text with the time elapsed as an integer
-	text = "Time elapsed: " + str(int(time_elapsed))
+	text = "Score: " + str(int(time_elapsed))
 	DifficultyChange()
 	#AddHighScore()
 		

@@ -5,8 +5,8 @@ extends Node2D
 @export var pauseMenu : Control
 
 #==========Buttons========================
-@export var ActivateShieldButton : Button
-@export var SettingsButton : Button
+@export var ActivateShieldButton : TextureButton
+@export var SettingsButton : TextureButton
 
 func _ready() -> void:
 	ActivateShieldButton.connect("pressed",spaceship.activate_Shield)
