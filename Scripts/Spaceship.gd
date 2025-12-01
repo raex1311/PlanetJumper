@@ -133,6 +133,7 @@ func deactivate_Shield():
 #==================LIFE======================================
 func DeductLife():
 	print("Deducted Life!!:--", Life)
+	gameManager.DeductTheLife()
 	if Life == 1:
 		gameManager.GameOver()
 	elif Life > 1 :

@@ -20,7 +20,11 @@ func Load_PlayerData():
 	GlobalVariables.globalpoints = playerData.points
 	GlobalVariables.HighScore = playerData.highscore
 	GlobalVariables.Boosters = playerData.Boosters
+	GlobalVariables.SFXVolume = playerData.SFXVolume
+	GlobalVariables.MusicVolume = playerData.MusicVolume
 	print("Points Loaded: ", playerData.points)
+	print("The SFX Volume: - ", playerData.SFXVolume)
+	print("The Music Volume: ", playerData.MusicVolume) 
 	
 func Save_PlayerData(saveTypeList : SavingTypeList):
 	var reverse_dict = {}
@@ -46,5 +50,11 @@ func update(saveType: String):
 		"Boosters":
 			playerData.change_boosters(GlobalVariables.Boosters)
 			print("Adding Boosters!!")
+		"MusicVolume":
+			playerData.change_music(GlobalVariables.MusicVolume)
+			print("Music changed to: ", GlobalVariables.MusicVolume)
+		"SFXVolume":
+			playerData.change_Sfx(GlobalVariables.SFXVolume)
+			print("Sfx changed to : ", GlobalVariables.SFXVolume)
 
 #=====================================================

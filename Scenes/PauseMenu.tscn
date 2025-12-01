@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://dmupes8gps0ij"]
+[gd_scene load_steps=14 format=3 uid="uid://dmupes8gps0ij"]
 
 [ext_resource type="Script" path="res://Scripts/PauseMenu.gd" id="1_ay8ll"]
 [ext_resource type="Texture2D" uid="uid://pd0wmnrpmqlu" path="res://Images/Rectangle 13.png" id="2_ly53g"]
 [ext_resource type="Texture2D" uid="uid://c33hsap4v6x2i" path="res://Images/Button Shop Filled.png" id="3_ptsio"]
 [ext_resource type="Texture2D" uid="uid://w6kesi4sf85q" path="res://Images/Button Shop Filled Highlighted.png" id="4_kyu1j"]
 [ext_resource type="FontFile" uid="uid://xmpx3ananbw8" path="res://Fonts/Meteoric-light.otf" id="5_px8he"]
+[ext_resource type="Texture2D" uid="uid://bxgrpv1kcnm40" path="res://Images/Not enough coins.png" id="6_e5exf"]
 [ext_resource type="Texture2D" uid="uid://cgmpnndlpgbi7" path="res://Images/Sound.png" id="6_ypfmd"]
 [ext_resource type="Texture2D" uid="uid://chko35smr5wxr" path="res://Images/Music.png" id="7_xwllo"]
 [ext_resource type="Texture2D" uid="uid://boutywncuxwto" path="res://Images/Minus sign.png" id="8_c06he"]
@@ -16,7 +17,7 @@
 base_font = ExtResource("5_px8he")
 variation_embolden = 1.36
 
-[node name="PauseMenu" type="Control"]
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("musicstream", "sfxstream")]
 process_mode = 3
 z_index = 2
 layout_mode = 3
@@ -26,6 +27,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ay8ll")
+musicstream = NodePath("Settings Menu/TextureRect/Music Progress Bar")
+sfxstream = NodePath("Settings Menu/TextureRect/SFX Progress Bar")
 
 [node name="Not Enough Coins" type="Panel" parent="."]
 self_modulate = Color(0.0859593, 0.167504, 0.133971, 0.670588)
@@ -38,6 +41,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="Not Enough Coins"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -53,37 +57,92 @@ grow_vertical = 2
 pivot_offset = Vector2(0.5, 0.5)
 color = Color(0.27333, 0.611565, 0.621742, 1)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Not Enough Coins/ColorRect"]
+[node name="TextureRect" type="TextureRect" parent="Not Enough Coins"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -50.0
-offset_right = 150.0
-offset_bottom = 50.0
+offset_left = -333.0
+offset_top = -331.0
+offset_right = 334.0
+offset_bottom = 331.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ly53g")
+
+[node name="Text Not Enough Coins" type="TextureRect" parent="Not Enough Coins/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.5
+offset_top = -294.0
+offset_right = 284.5
+offset_bottom = 147.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_e5exf")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Not Enough Coins/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -151.5
+offset_top = -50.5
+offset_right = 148.5
+offset_bottom = 49.5
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(0.5, 0.5)
 bbcode_enabled = true
 text = "[center][color=blue] Not Enough Coins!!"
 
-[node name="Resume Button" type="Button" parent="Not Enough Coins/ColorRect"]
+[node name="ResumeButtonTexture" type="TextureButton" parent="Not Enough Coins/TextureRect"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -35.0
-offset_top = -200.0
-offset_right = 35.0
-offset_bottom = -169.0
+offset_left = -170.5
+offset_top = -109.8
+offset_right = 170.5
+offset_bottom = -29.8
 grow_horizontal = 2
 grow_vertical = 0
-text = "Resume"
+texture_normal = ExtResource("3_ptsio")
+texture_pressed = ExtResource("4_kyu1j")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Not Enough Coins/TextureRect/ResumeButtonTexture"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.5
+offset_top = -18.0
+offset_right = 100.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.47451, 0.988235, 0.929412, 1)
+theme_override_fonts/normal_font = SubResource("FontVariation_hp67q")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[center]Resume[/center]"
 
 [node name="Settings Menu" type="Panel" parent="."]
 z_index = 2
@@ -140,7 +199,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Resume Game"
 
-[node name="LaunchButton" type="TextureButton" parent="Settings Menu/TextureRect"]
+[node name="ResumeButton" type="TextureButton" parent="Settings Menu/TextureRect"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -158,7 +217,7 @@ texture_pressed = ExtResource("4_kyu1j")
 ignore_texture_size = true
 stretch_mode = 4
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="Settings Menu/TextureRect/LaunchButton"]
+[node name="RichTextLabel3" type="RichTextLabel" parent="Settings Menu/TextureRect/ResumeButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -204,29 +263,29 @@ grow_vertical = 2
 texture = ExtResource("7_xwllo")
 expand_mode = 1
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Settings Menu/TextureRect"]
+[node name="SFX Progress Bar" type="TextureProgressBar" parent="Settings Menu/TextureRect"]
 layout_mode = 0
 offset_left = 265.0
 offset_top = 14.0
 offset_right = 513.0
 offset_bottom = 253.0
-value = 52.0
+value = 100.0
 nine_patch_stretch = true
 texture_under = ExtResource("8_xb6gw")
 texture_progress = ExtResource("9_clyjp")
 
-[node name="TextureProgressBar2" type="TextureProgressBar" parent="Settings Menu/TextureRect"]
+[node name="Music Progress Bar" type="TextureProgressBar" parent="Settings Menu/TextureRect"]
 layout_mode = 0
 offset_left = 267.0
 offset_top = 88.0
 offset_right = 515.0
 offset_bottom = 327.0
-value = 52.0
+value = 100.0
 nine_patch_stretch = true
 texture_under = ExtResource("8_xb6gw")
 texture_progress = ExtResource("9_clyjp")
 
-[node name="TextureButton" type="TextureButton" parent="Settings Menu/TextureRect"]
+[node name="SFX Minus Button" type="TextureButton" parent="Settings Menu/TextureRect"]
 layout_mode = 0
 offset_left = 504.0
 offset_top = 106.0
@@ -236,7 +295,7 @@ texture_normal = ExtResource("8_c06he")
 ignore_texture_size = true
 stretch_mode = 4
 
-[node name="TextureButton3" type="TextureButton" parent="Settings Menu/TextureRect"]
+[node name="SFX Plus Button" type="TextureButton" parent="Settings Menu/TextureRect"]
 layout_mode = 0
 offset_left = 566.0
 offset_top = 107.0
@@ -246,7 +305,7 @@ texture_normal = ExtResource("9_re0d0")
 ignore_texture_size = true
 stretch_mode = 4
 
-[node name="TextureButton2" type="TextureButton" parent="Settings Menu/TextureRect"]
+[node name="Music Minus Button" type="TextureButton" parent="Settings Menu/TextureRect"]
 layout_mode = 0
 offset_left = 504.0
 offset_top = 184.0
@@ -256,7 +315,7 @@ texture_normal = ExtResource("8_c06he")
 ignore_texture_size = true
 stretch_mode = 4
 
-[node name="TextureButton4" type="TextureButton" parent="Settings Menu/TextureRect"]
+[node name="Music Plus Button" type="TextureButton" parent="Settings Menu/TextureRect"]
 layout_mode = 0
 offset_left = 570.0
 offset_top = 186.0
@@ -266,11 +325,10 @@ texture_normal = ExtResource("9_re0d0")
 ignore_texture_size = true
 stretch_mode = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Settings Menu/TextureRect"]
-layout_mode = 0
-offset_right = 540.0
-offset_bottom = 130.0
-
-[connection signal="pressed" from="Not Enough Coins/ColorRect/Resume Button" to="." method="hide_pauseMenu"]
+[connection signal="pressed" from="Not Enough Coins/TextureRect/ResumeButtonTexture" to="." method="hide_pauseMenu"]
 [connection signal="pressed" from="Settings Menu/TextureRect/Resume Button" to="." method="hide_pauseMenu"]
-[connection signal="pressed" from="Settings Menu/TextureRect/LaunchButton" to="." method="hide_pauseMenu"]
+[connection signal="pressed" from="Settings Menu/TextureRect/ResumeButton" to="." method="hide_pauseMenu"]
+[connection signal="pressed" from="Settings Menu/TextureRect/SFX Minus Button" to="." method="subtract_sfxvolume"]
+[connection signal="pressed" from="Settings Menu/TextureRect/SFX Plus Button" to="." method="add_sfxvolume"]
+[connection signal="pressed" from="Settings Menu/TextureRect/Music Minus Button" to="." method="subtract_musicvolume"]
+[connection signal="pressed" from="Settings Menu/TextureRect/Music Plus Button" to="." method="add_musicvolume"]

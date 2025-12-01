@@ -23,6 +23,16 @@ func Refresh_Stored_Data():
 	else:
 		print("There is no any boosters!!")
 	$Panel/ColorRect/"Booster Points".text = str("Booster Points: ",GlobalVariables.Boosters)
+	if(SaveAndLoad.playerData.MusicVolume==null):
+		GlobalVariables.MusicVolume = 1
+	else:
+		GlobalVariables.MusicVolume = SaveAndLoad.playerData.MusicVolume
+		print("Global Music Volume!! - ", GlobalVariables.MusicVolume)
+	if(SaveAndLoad.playerData.SFXVolume == null):
+		GlobalVariables.SFXVolume = 1
+	else:
+		GlobalVariables.SFXVolume = SaveAndLoad.playerData.SFXVolume
+		print("Global SFX Volume:-" , GlobalVariables.SFXVolume)
 
 	
 func start_button_pressed():

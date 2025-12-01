@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2ixjjnqh7gsf"]
+
+[ext_resource type="FontFile" uid="uid://xmpx3ananbw8" path="res://Fonts/Meteoric-light.otf" id="1_vh5vo"]
+
+[sub_resource type="FontVariation" id="FontVariation_gjxjp"]
+base_font = ExtResource("1_vh5vo")
+variation_embolden = 1.36
+
+[node name="LeaderboardRow" type="HBoxContainer"]
+custom_minimum_size = Vector2(400, 40)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -429.0
+offset_bottom = -1808.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.47451, 0.988235, 0.929412, 1)
+theme_override_fonts/normal_font = SubResource("FontVariation_gjxjp")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[center]Close Shop[/center]"
+
+[node name="ScoreLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.47451, 0.988235, 0.929412, 1)
+theme_override_fonts/normal_font = SubResource("FontVariation_gjxjp")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[center]Close Shop[/center]"

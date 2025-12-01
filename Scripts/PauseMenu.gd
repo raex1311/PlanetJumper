@@ -1,10 +1,18 @@
 extends Node
 
 var gameManager
+@export var musicstream : TextureProgressBar
+@export var sfxstream : TextureProgressBar
+
+signal submusic(volume : float)
+signal addmusic(volume : float)
+signal subsfx(volume : float)
+signal addsfx(volume : float)
 
 func _ready() -> void:
 	gameManager = get_node("../")
 	hide_subMenu()
+	init_volume()
 	
 func show_pauseMenu(menuType : String):
 	get_node(".").visible = true
@@ -24,6 +32,27 @@ func show_subMenu(menuType: String):
 			$"Settings Menu".visible = true
 	pass
 	
+func init_volume():
+	musicstream.value = GlobalVariables.MusicVolume * 100
+	sfxstream.value = GlobalVariables.SFXVolume * 100
+
 func hide_subMenu():
 	$"Not Enough Coins".visible = false
 	$"Settings Menu".visible = false
+	
+func subtract_musicvolume():
+	musicstream.value = musicstream.value - 10
+	submusic.emit(musicstream.value/100)
+	
+
+func add_musicvolume():
+	musicstream.value = musicstream.value + 10
+	addmusic.emit(musicstream.value/100)
+	
+func subtract_sfxvolume():
+	sfxstream.value = sfxstream.value - 10
+	subsfx.emit(sfxstream.value/100)
+	
+func add_sfxvolume():
+	sfxstream.value = sfxstream.value + 10
+	addsfx.emit(sfxstream.value/100)

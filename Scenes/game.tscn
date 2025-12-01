@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bdmppjpfodq7j"]
+[gd_scene load_steps=38 format=3 uid="uid://bdmppjpfodq7j"]
 
 [ext_resource type="PackedScene" uid="uid://btmmhcglgp64n" path="res://Scenes/Planet1.tscn" id="1_tx5vb"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_vpq13"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cek487f24avmw" path="res://Scenes/spaceship.tscn" id="2_wh45f"]
 [ext_resource type="PackedScene" uid="uid://y8jq1mps054j" path="res://Scenes/Earth.tscn" id="3_7ex4b"]
 [ext_resource type="PackedScene" uid="uid://dp6smdq8x17kg" path="res://Scenes/DeathWall.tscn" id="4_c0wpf"]
+[ext_resource type="PackedScene" uid="uid://ce0g4kiifflwu" path="res://Scenes/Explosion.tscn" id="6_k3xj1"]
 [ext_resource type="Script" path="res://Scenes/TimeCount.gd" id="8_ngh32"]
 [ext_resource type="PackedScene" uid="uid://dftml8jyodeb" path="res://Scenes/Background.tscn" id="8_nk0yu"]
 [ext_resource type="PackedScene" uid="uid://cp7ghsqhtfsnu" path="res://Scenes/shield.tscn" id="8_qb8qs"]
@@ -23,6 +24,8 @@
 [ext_resource type="Texture2D" uid="uid://cb2dbvlnek2vm" path="res://Images/Settings1.png" id="15_885cq"]
 [ext_resource type="Texture2D" uid="uid://0lwpqiugmqcn" path="res://Images/Settings2.png" id="16_7hlyi"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/DifficultyState2.gd" id="16_nucjy"]
+[ext_resource type="Texture2D" uid="uid://ccq0kwqi75pk6" path="res://Images/Heart.png" id="17_dy0ty"]
+[ext_resource type="Script" path="res://Scripts/Life.gd" id="17_p6hsa"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/DifficultyState3.gd" id="17_pqtlj"]
 [ext_resource type="Texture2D" uid="uid://c2756fk50il4y" path="res://Images/The Game Over 2.png" id="18_53o2v"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/DifficultyState4.gd" id="18_gtcsy"]
@@ -36,6 +39,18 @@
 [sub_resource type="FontVariation" id="FontVariation_vwjje"]
 base_font = ExtResource("12_rhdys")
 variation_embolden = 1.36
+
+[sub_resource type="Environment" id="Environment_35whx"]
+background_mode = 3
+tonemap_mode = 3
+glow_enabled = true
+glow_levels/1 = 1.0
+glow_levels/2 = 1.0
+glow_levels/4 = 1.0
+glow_levels/6 = 1.0
+glow_levels/7 = 2.0
+glow_blend_mode = 1
+glow_hdr_scale = 2.31
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("timer", "point_label")]
 script = ExtResource("1_vpq13")
@@ -58,6 +73,10 @@ position = Vector2(-538.99, -963.08)
 
 [node name="Earth" parent="." instance=ExtResource("3_7ex4b")]
 position = Vector2(0, -4)
+
+[node name="Explosion" parent="Earth" instance=ExtResource("6_k3xj1")]
+scale = Vector2(10, 10)
+lifetime = 0.6
 
 [node name="TheSpaceship" parent="Earth" groups=["spaceships"] instance=ExtResource("2_wh45f")]
 position = Vector2(0, -1525)
@@ -270,6 +289,40 @@ texture_normal = ExtResource("15_885cq")
 texture_pressed = ExtResource("16_7hlyi")
 ignore_texture_size = true
 stretch_mode = 4
+
+[node name="Life Container" type="HFlowContainer" parent="GameHUD" node_paths=PackedStringArray("Heart1", "Heart2", "Heart3", "GameManager")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+offset_left = 59.0
+offset_top = 120.0
+offset_right = 189.0
+offset_bottom = 160.0
+script = ExtResource("17_p6hsa")
+Heart1 = NodePath("Heart")
+Heart2 = NodePath("Heart2")
+Heart3 = NodePath("Heart3")
+GameManager = NodePath("../..")
+
+[node name="Heart" type="TextureRect" parent="GameHUD/Life Container"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("17_dy0ty")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Heart2" type="TextureRect" parent="GameHUD/Life Container"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("17_dy0ty")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Heart3" type="TextureRect" parent="GameHUD/Life Container"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("17_dy0ty")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="PauseMenu" parent="." instance=ExtResource("11_feymk")]
 visible = false
@@ -636,14 +689,18 @@ meteor = ExtResource("9_lceoo")
 [node name="M_Timer" type="Timer" parent="MeteorManager"]
 autostart = true
 
-[node name="SoundManager" type="Node2D" parent="." node_paths=PackedStringArray("GameManager")]
+[node name="SoundManager" type="Node2D" parent="." node_paths=PackedStringArray("GameManager", "PauseMenu")]
 script = ExtResource("31_h8i3w")
 Jump = ExtResource("32_g143s")
 GameManager = NodePath("..")
+PauseMenu = NodePath("../PauseMenu")
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="SoundManager"]
 
 [node name="SFXPlayer" type="AudioStreamPlayer2D" parent="SoundManager"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_35whx")
 
 [connection signal="child_exiting_tree" from="Earth" to="Earth" method="on_spaceship_exit"]
 [connection signal="timeout" from="Earth/TheSpaceship/ShieldTimer" to="Earth/TheSpaceship" method="deactivate_Shield"]

@@ -4,6 +4,8 @@ var globalpoints : int
 var HighScore : int
 var Shield_Time : int
 var Boosters : int
+var SFXVolume : float
+var MusicVolume : float
 
 func add_point():
 	globalpoints = 1 + globalpoints
@@ -24,3 +26,9 @@ func add_Boosters():
 
 func deduct_Boosters():
 	Boosters = Boosters - 1
+	
+func change_SFX(volume : float):
+	SFXVolume = volume
+	
+func change_music(volume : float):
+	MusicVolume = volume

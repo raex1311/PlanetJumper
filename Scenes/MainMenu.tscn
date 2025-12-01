@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://btpmrtqurv82x"]
+[gd_scene load_steps=26 format=3 uid="uid://btpmrtqurv82x"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_pa3dl"]
 [ext_resource type="Script" path="res://Scripts/Shop.gd" id="2_exrl1"]
@@ -7,6 +7,15 @@
 [ext_resource type="FontFile" uid="uid://xmpx3ananbw8" path="res://Fonts/Meteoric-light.otf" id="4_5e6j0"]
 [ext_resource type="Texture2D" uid="uid://32nnnpukb4bv" path="res://Images/Glow Button.png" id="4_yf0eu"]
 [ext_resource type="PackedScene" uid="uid://cvyfsfu760j68" path="res://Scenes/ShopPanel.tscn" id="7_ore62"]
+[ext_resource type="Texture2D" uid="uid://8xkxdtr232pe" path="res://Images/Button Shop.png" id="8_fb21k"]
+[ext_resource type="Script" path="res://Scripts/Name.gd" id="8_qowsi"]
+[ext_resource type="Texture2D" uid="uid://caguxpk8on44f" path="res://Images/Small Button.png" id="9_ie77h"]
+[ext_resource type="Texture2D" uid="uid://du5fcnpgfv8sx" path="res://Images/Small Button Highlighted.png" id="10_yvajw"]
+[ext_resource type="Script" path="res://Scripts/Leaderboard.gd" id="12_l4nl1"]
+[ext_resource type="Texture2D" uid="uid://pd0wmnrpmqlu" path="res://Images/Rectangle 13.png" id="13_lwclu"]
+[ext_resource type="Texture2D" uid="uid://bto4wgm1s81ak" path="res://Images/Leaderboard Button.png" id="13_rdxcl"]
+[ext_resource type="Texture2D" uid="uid://c33hsap4v6x2i" path="res://Images/Button Shop Filled.png" id="14_m56f4"]
+[ext_resource type="Texture2D" uid="uid://w6kesi4sf85q" path="res://Images/Button Shop Filled Highlighted.png" id="15_h37hx"]
 
 [sub_resource type="FontVariation" id="FontVariation_kdxq1"]
 base_font = ExtResource("4_5e6j0")
@@ -21,6 +30,28 @@ base_font = ExtResource("4_5e6j0")
 variation_embolden = 1.5
 
 [sub_resource type="FontVariation" id="FontVariation_1nx73"]
+base_font = ExtResource("4_5e6j0")
+variation_embolden = 1.36
+
+[sub_resource type="Theme" id="Theme_88w1j"]
+default_font = ExtResource("4_5e6j0")
+default_font_size = 60
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6bh7g"]
+content_margin_left = 47.0
+content_margin_top = 99.0
+content_margin_right = 30.0
+texture = ExtResource("8_fb21k")
+
+[sub_resource type="FontVariation" id="FontVariation_5cdjh"]
+base_font = ExtResource("4_5e6j0")
+variation_embolden = 1.36
+
+[sub_resource type="FontVariation" id="FontVariation_58w2b"]
+base_font = ExtResource("4_5e6j0")
+variation_embolden = 1.36
+
+[sub_resource type="FontVariation" id="FontVariation_adqeg"]
 base_font = ExtResource("4_5e6j0")
 variation_embolden = 1.36
 
@@ -265,6 +296,184 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Buy Boosters"
 
+[node name="Leaderboard Button" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -175.0
+offset_top = -254.0
+offset_right = -52.0
+offset_bottom = -129.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("13_rdxcl")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Name Panel" type="Panel" parent="." node_paths=PackedStringArray("nametext")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_qowsi")
+nametext = NodePath("TextEdit")
+
+[node name="TextEdit" type="TextEdit" parent="Name Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -314.5
+offset_top = -90.5
+offset_right = 314.5
+offset_bottom = 90.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_88w1j")
+theme_override_colors/font_color = Color(0.231373, 0.827451, 0.6, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_6bh7g")
+placeholder_text = "Name"
+
+[node name="Submit Button" type="TextureButton" parent="Name Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.0
+offset_top = 153.0
+offset_right = 116.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("9_ie77h")
+texture_pressed = ExtResource("10_yvajw")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Name Panel/Submit Button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.5
+offset_top = -18.0
+offset_right = 100.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.47451, 0.988235, 0.929412, 1)
+theme_override_fonts/normal_font = SubResource("FontVariation_5cdjh")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[center]Submit[/center]"
+
+[node name="Leaderboard Panel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_l4nl1")
+
+[node name="LeaderboardBackground" type="TextureRect" parent="Leaderboard Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -330.0
+offset_top = -330.0
+offset_right = 330.0
+offset_bottom = 330.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_lwclu")
+
+[node name="NameLabel" type="RichTextLabel" parent="Leaderboard Panel/LeaderboardBackground"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 12.0
+offset_right = 100.0
+offset_bottom = 52.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.47451, 0.988235, 0.929412, 1)
+theme_override_fonts/normal_font = SubResource("FontVariation_58w2b")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[center]Leaderboard[/center]"
+
+[node name="Close Button" type="TextureButton" parent="Leaderboard Panel/LeaderboardBackground"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -169.0
+offset_top = -114.0
+offset_right = 172.0
+offset_bottom = -34.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("14_m56f4")
+texture_pressed = ExtResource("15_h37hx")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Leaderboard Panel/LeaderboardBackground/Close Button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.5
+offset_top = -18.0
+offset_right = 100.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.47451, 0.988235, 0.929412, 1)
+theme_override_fonts/normal_font = SubResource("FontVariation_adqeg")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[center]Close[/center]"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Leaderboard Panel"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 0
+offset_left = 276.0
+offset_top = 733.0
+offset_right = 808.0
+offset_bottom = 1142.0
+
+[node name="LeaderboardList" type="VBoxContainer" parent="Leaderboard Panel/ScrollContainer"]
+custom_minimum_size = Vector2(400, 40)
+layout_mode = 2
+alignment = 1
+
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/NewGame Button" to="." method="start_button_pressed"]
 [connection signal="button_down" from="VBoxContainer/Options Button" to="Shop" method="theconnection"]
@@ -272,3 +481,6 @@ text = "Buy Boosters"
 [connection signal="button_down" from="Buy Shield" to="Shop" method="Buy_Shield"]
 [connection signal="pressed" from="Buy Points" to="Shop" method="Buy_Points"]
 [connection signal="pressed" from="Buy Boosters" to="Shop" method="Buy_Boosters"]
+[connection signal="pressed" from="Leaderboard Button" to="Leaderboard Panel" method="Open_Leaderboard"]
+[connection signal="pressed" from="Name Panel/Submit Button" to="Name Panel" method="Submit_Name"]
+[connection signal="pressed" from="Leaderboard Panel/LeaderboardBackground/Close Button" to="Leaderboard Panel" method="Close_Leaderboard"]

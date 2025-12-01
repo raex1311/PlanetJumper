@@ -79,7 +79,11 @@ signal LeavePlanet
 signal EnteredPlayArea
 signal ExitPlayArea
 signal LandedOnPlanet
+signal DeductLife
 #============================
+func DeductTheLife():
+	DeductLife.emit()
+
 func LandPlanet():
 	LandedOnPlanet.emit()
 	

@@ -1,6 +1,7 @@
 extends Node2D
 var json = JSON.new()
 
+var save_path := "user://save//player_name.save"
 var firebase_url = "https://planetjumper-8af2b-default-rtdb.firebaseio.com/highscores.json"
 var firebase_url2 = "https://planetjumper-8af2b-default-rtdb.firebaseio.com/highscores/<uniqueID>.json"
 var uniqueID
@@ -8,6 +9,15 @@ var uniqueID
 func _ready() -> void:
 	uniqueID = OS.get_unique_id()
 	get_highest_score()
+	
+func Get_Name():
+	if FileAccess.file_exists(save_path):
+		var file = FileAccess.open(save_path, FileAccess.READ)
+		if file:
+			var name = file.get_line()
+			file.close()
+			return name
+	return "Guest" 
 # Function to get the highest score
 func get_highest_score():
 	var url = firebase_url + "?orderBy=\"score\"&print=pretty"  # Fetch the top score
@@ -47,7 +57,7 @@ func write_high_score(player_name: String, score: int):
 	add_child(http_request)
 	
 	var json_data = {
-		"name" : player_name,
+		"name" : Get_Name(),
 		"score" : score
 	}
 	var headers = ["Content-Type: application/json"]
